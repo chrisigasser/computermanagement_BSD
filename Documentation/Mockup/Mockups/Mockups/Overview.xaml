@@ -21,9 +21,18 @@
             <ListBoxItem Content="4jobsWS710"></ListBoxItem>
             <ListBoxItem Content="4jobsWS711"></ListBoxItem>
             <ListBoxItem Content="4jobsBM43"></ListBoxItem>
-            <ListBoxItem Content="4jobsM354"></ListBoxItem>
+            <ListBoxItem IsSelected="True" Content="4jobsM354"></ListBoxItem>
             <ListBoxItem Content="4jobsM354"></ListBoxItem>
             <ListBoxItem Content="4jobsM355"></ListBoxItem>
         </ListBox>
+        <Button x:Name="button" Content="Add Hardware" HorizontalAlignment="Left" Margin="477,302,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="button1" Content="Delete Hardware" HorizontalAlignment="Left" Margin="477,327,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="button2" Content="Display Info" HorizontalAlignment="Left" Margin="477,352,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label x:Name="label2" Content="Name:" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="4jobsM354" HorizontalAlignment="Left" Margin="77,304,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Type:" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Montitor 24&quot;" HorizontalAlignment="Left" Margin="77,335,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="Desc:" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label7" Content="Connected to 4jobsWS710" HorizontalAlignment="Left" Margin="77,366,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
