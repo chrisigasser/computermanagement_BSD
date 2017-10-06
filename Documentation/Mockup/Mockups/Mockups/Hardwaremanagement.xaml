@@ -1,0 +1,23 @@
+﻿<Window x:Class="Mockups.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mockups"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="751.898" Width="1161.892">
+    <Grid>
+        <Label x:Name="label" Content="Available Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="673" Margin="10,40,0,0" VerticalAlignment="Top" Width="205">
+            <ListBoxItem IsSelected="True" Content="Workstation4328"></ListBoxItem>
+            <ListBoxItem Content="Monitor 24&quot;"></ListBoxItem>
+            <ListBoxItem Content="Switch"></ListBoxItem>
+            <ListBoxItem Content="Workstation2948"></ListBoxItem>
+            <ListBoxItem Content="Beamer NEC"></ListBoxItem>
+        </ListBox>
+        <Label x:Name="label2" Content="Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="262,83,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Source="data/logos/thinkstation.jpg" Height="180" Margin="324,109,0,0" VerticalAlignment="Top" Width="258"/>
+        <TextBox x:Name="label3" Text="Workstation4328" HorizontalAlignment="Left" Margin="324,87,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
+
+    </Grid>
+</Window>
