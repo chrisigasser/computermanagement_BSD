@@ -15,14 +15,16 @@
             <ListBoxItem Content="Workstation2948"></ListBoxItem>
             <ListBoxItem Content="Beamer NEC"></ListBoxItem>
         </ListBox>
-        <Label x:Name="label2" Content="Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="262,83,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Source="data/logos/thinkstation.jpg" Height="180" Margin="324,161,0,0" VerticalAlignment="Top" Width="258"/>
+        <Label x:Name="label2" Content="Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="275,83,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Source="data/logos/thinkstation.jpg" Height="180" Margin="324,271,0,0" VerticalAlignment="Top" Width="258"/>
         <TextBox x:Name="label3" Text="Workstation4328" HorizontalAlignment="Left" Margin="324,87,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
-        <Label x:Name="label1" Content="Logopfad" HorizontalAlignment="Left" Margin="262,107,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Logopath" HorizontalAlignment="Left" Margin="263,110,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="label3_Copy" Text="data/logos/thinkstation.jpg" HorizontalAlignment="Left" Margin="324,112,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
         <Button x:Name="button" Content="create new" HorizontalAlignment="Left" Margin="666,83,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button1" Content="save" HorizontalAlignment="Left" Margin="666,112,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button2" Content="delete" HorizontalAlignment="Left" Margin="666,145,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox" MaxLines="100" Text="i7-4700, 8gb Ram, 512gb SSD" HorizontalAlignment="Left" Height="123" Margin="324,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258"/>
+        <Label x:Name="label4" Content="Description" HorizontalAlignment="Left" Margin="249,142,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

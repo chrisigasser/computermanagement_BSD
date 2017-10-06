@@ -5,15 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mockups"
         mc:Ignorable="d"
-        Title="Overview" Height="381.266" Width="583.377">
+        Title="Overview" Height="486.279" Width="736.939">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="77,14,0,0" VerticalAlignment="Top" Width="246" SelectedIndex="0">
             <ComboBoxItem IsSelected="True" Content="Hauptgebäude"></ComboBoxItem>
         </ComboBox>
         <Label x:Name="label" Content="Housing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="347,14,0,0" VerticalAlignment="Top" Width="220" SelectedIndex="0">
-            <ComboBoxItem IsSelected="True" Content="Büro 215"></ComboBoxItem>
+            <ComboBoxItem IsSelected="True" Content="Konferenz 1"></ComboBoxItem>
         </ComboBox>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="202" Margin="17,48,0,0" VerticalAlignment="Top" Width="306"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Source="/data/Housings/Housing1.png" Height="249" Margin="17,48,0,0" VerticalAlignment="Top" Width="550"/>
+        <Label x:Name="label1" Content="Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="579,11,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="408" Margin="579,39,0,0" VerticalAlignment="Top" Width="141">
+            <ListBoxItem Content="4jobsWS709"></ListBoxItem>
+            <ListBoxItem Content="4jobsWS710"></ListBoxItem>
+            <ListBoxItem Content="4jobsWS711"></ListBoxItem>
+            <ListBoxItem Content="4jobsBM43"></ListBoxItem>
+            <ListBoxItem Content="4jobsM354"></ListBoxItem>
+            <ListBoxItem Content="4jobsM354"></ListBoxItem>
+            <ListBoxItem Content="4jobsM355"></ListBoxItem>
+        </ListBox>
     </Grid>
 </Window>

@@ -51,7 +51,8 @@ NULL
 create table roomHAShardware (
     id int primary key,
     hardwareID int references hardware(id),
-    roomID int REFERENCES room(id)
+    roomID int REFERENCES room(id),
+	name varchar2(100)
 );
 
 create table networkInfo (
