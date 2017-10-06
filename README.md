@@ -1,6 +1,7 @@
 # Statusberichte
 ## 06.10.2017
 * EERD created
+	* for ASCII Art see Oracle_Database Folder
 * inserts + trigger tested
 * Most important Mockups
     * Hardwaremanagement
