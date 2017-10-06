@@ -99,20 +99,35 @@ create table furtherInformation (
 );
 
 
-
-
 CREATE OR REPLACE TRIGGER checkUser
   BEFORE INSERT OR UPDATE ON allowedUser
   FOR EACH ROW
   DECLARE
       numberOfAD number;
+	  numberOfUser number;
   BEGIN
-      select count(part) into numberOfAD FROM allowedUser where isAD = 1 AND part=:new.part group by part;
+	BEGIN
+		select count(part) into numberOfAD FROM allowedUser where isAD = 1 AND part=:new.part group by part;
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+        numberOfAD := 0;
+    END;
+	BEGIN
+		select count(part) into numberOfUser FROM allowedUser where NVL(isAD, 0) = 0 AND part=:new.part group by part;
+    EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+        numberOfUser := 0;
+    END;
+	
       if numberOfAD = 1 then
         Raise_application_error(-20201, 'AD already defined!');
       end if;
+	  
+	  if :new.isAD = 1 AND numberOfUser <> 0 then
+		Raise_application_error(-20203, 'Please delete the AD Entry first!');
+	  end if;
 
-      if :new.isAD = 1 AND :new.uname != NULL then
+      if :new.isAD = 1 AND NVL(:new.uname,0) != 0 then
         Raise_application_error(-20202, 'AD and user can not be set at the same time!');
       end if;
 END;
