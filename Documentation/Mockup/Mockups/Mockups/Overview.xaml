@@ -1,0 +1,19 @@
+﻿<Window x:Class="Mockups.Overview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mockups"
+        mc:Ignorable="d"
+        Title="Overview" Height="381.266" Width="583.377">
+    <Grid>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="77,14,0,0" VerticalAlignment="Top" Width="246" SelectedIndex="0">
+            <ComboBoxItem IsSelected="True" Content="Hauptgebäude"></ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="label" Content="Housing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="347,14,0,0" VerticalAlignment="Top" Width="220" SelectedIndex="0">
+            <ComboBoxItem IsSelected="True" Content="Büro 215"></ComboBoxItem>
+        </ComboBox>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="202" Margin="17,48,0,0" VerticalAlignment="Top" Width="306"/>
+    </Grid>
+</Window>
