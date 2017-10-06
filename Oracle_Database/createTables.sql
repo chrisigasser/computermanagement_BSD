@@ -1,3 +1,15 @@
+drop table hardware cascade constraints;
+drop table housing cascade constraints;
+drop table room cascade constraints;
+drop table roomHAShardware cascade constraints;
+drop table networkInfo cascade constraints;
+drop table anwendung cascade constraints;
+drop table hasAnwendung cascade constraints;
+drop table avail_User cascade constraints;
+drop table allowedUser cascade constraints;
+drop table works cascade constraints;
+drop table furtherInformation cascade constraints;
+
 create table hardware (
     id int primary key,
     name VARCHAR2(100),
@@ -12,7 +24,28 @@ create table housing (
 create table room (
   id int primary key,
   name VARCHAR2(100),
+  shape SDO_GEOMETRY,
   housing int references housing(id)
+);
+
+delete from user_sdo_geom_metadata
+where table_name = 'room' 
+or table_name = 'ROOM';
+
+INSERT INTO user_sdo_geom_metadata
+( TABLE_NAME,
+COLUMN_NAME,
+DIMINFO,
+SRID
+)
+VALUES
+( 'room',
+'shape',
+SDO_DIM_ARRAY(
+SDO_DIM_ELEMENT('X', 0, 200, 1),
+SDO_DIM_ELEMENT('Y', 0, 200, 1)
+),
+NULL
 );
 
 create table roomHAShardware (
@@ -53,22 +86,6 @@ create table allowedUser (
    uname int references avail_User(id)
 );
 
-CREATE OR REPLACE TRIGGER checkUser
-  BEFORE INSERT OR UPDATE ON allowedUser
-  FOR EACH ROW
-  DECLARE
-      numberOfAD number;
-  BEGIN
-      select count(part) into numberOfAD FROM allowedUser where isAD = 1 AND part=:new.part group by part;
-      if numberOfAD = 1 then
-        Raise_application_error(-20201, 'AD already defined!');
-      end if;
-
-      if :new.isAD = 1 AND uname != NULL then
-        Raise_application_error(-20202, 'AD and user can not be set at the same time!');
-      end if;
-END;
-
 create table works (
   part int references roomHAShardware(id),
   working Number(1,0),
@@ -80,3 +97,22 @@ create table furtherInformation (
   info VARCHAR2(2000),
   primary key(part)
 );
+
+
+
+
+CREATE OR REPLACE TRIGGER checkUser
+  BEFORE INSERT OR UPDATE ON allowedUser
+  FOR EACH ROW
+  DECLARE
+      numberOfAD number;
+  BEGIN
+      select count(part) into numberOfAD FROM allowedUser where isAD = 1 AND part=:new.part group by part;
+      if numberOfAD = 1 then
+        Raise_application_error(-20201, 'AD already defined!');
+      end if;
+
+      if :new.isAD = 1 AND :new.uname != NULL then
+        Raise_application_error(-20202, 'AD and user can not be set at the same time!');
+      end if;
+END;
