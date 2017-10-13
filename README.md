@@ -5,7 +5,7 @@
     * Building GUIs from the Mockup
     * classes and managerclasses for the Anwendung and Hardware Views
 * Oracle
-	*Logical Model
+	* Logical Model
 
 ## 06.10.2017
 * EERD created
