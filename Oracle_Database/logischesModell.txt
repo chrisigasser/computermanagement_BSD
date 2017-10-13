@@ -1,4 +1,4 @@
-hardware(id, name, logo)
+hardware(id, name, logo, hdesc)
 SK: id
 
 housing(id, name)

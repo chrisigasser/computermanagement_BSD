@@ -13,7 +13,8 @@ drop table furtherInformation cascade constraints;
 create table hardware (
     id int primary key,
     name VARCHAR2(100),
-    logo VARCHAR2(300)
+    logo VARCHAR2(300),
+	hdesc VARCHAR2(500)
 );
 
 create table housing (
