@@ -1,0 +1,38 @@
+﻿<Window x:Class="Computermanagement.Overview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computermanagement"
+        mc:Ignorable="d"
+        Title="Overview" Height="486.279" Width="736.939">
+    <Grid>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="77,14,0,0" VerticalAlignment="Top" Width="246" SelectedIndex="0">
+            <ComboBoxItem IsSelected="True" Content="Hauptgebäude"></ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="label" Content="Housing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="347,14,0,0" VerticalAlignment="Top" Width="220" SelectedIndex="0">
+            <ComboBoxItem IsSelected="True" Content="Konferenz 1"></ComboBoxItem>
+        </ComboBox>
+        <Image x:Name="image" HorizontalAlignment="Left" Source="/data/Housings/Housing1.png" Height="249" Margin="17,48,0,0" VerticalAlignment="Top" Width="550"/>
+        <Label x:Name="label1" Content="Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="579,11,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="408" Margin="579,39,0,0" VerticalAlignment="Top" Width="141">
+            <ListBoxItem Content="4jobsWS709"></ListBoxItem>
+            <ListBoxItem Content="4jobsWS710"></ListBoxItem>
+            <ListBoxItem Content="4jobsWS711"></ListBoxItem>
+            <ListBoxItem Content="4jobsBM43"></ListBoxItem>
+            <ListBoxItem IsSelected="True" Content="4jobsM354"></ListBoxItem>
+            <ListBoxItem Content="4jobsM354"></ListBoxItem>
+            <ListBoxItem Content="4jobsM355"></ListBoxItem>
+        </ListBox>
+        <Button x:Name="button" Content="Add Hardware" HorizontalAlignment="Left" Margin="477,302,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="button1" Content="Delete Hardware" HorizontalAlignment="Left" Margin="477,327,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="button2" Content="Display Info" HorizontalAlignment="Left" Margin="477,352,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label x:Name="label2" Content="Name:" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="4jobsM354" HorizontalAlignment="Left" Margin="77,304,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Type:" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Montitor 24&quot;" HorizontalAlignment="Left" Margin="77,335,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="Desc:" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label7" Content="Connected to 4jobsWS710" HorizontalAlignment="Left" Margin="77,366,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

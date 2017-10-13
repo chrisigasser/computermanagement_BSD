@@ -1,0 +1,15 @@
+﻿<Window x:Class="Computermanagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computermanagement"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="btn_Hardwaremanagement" Content="Hardwaremanagement" HorizontalAlignment="Left" Margin="158,40,0,0" VerticalAlignment="Top" Width="146" Height="46" Click="btn_Hardwaremanagement_Click"/>
+        <Button x:Name="btn_Overview" Content="Overview" HorizontalAlignment="Left" Margin="158,115,0,0" VerticalAlignment="Top" Width="146" Height="54" Click="btn_Overview_Click"/>
+        <Button x:Name="btn_Anwendungen" Content="Anwendungen" HorizontalAlignment="Left" Margin="158,201,0,0" VerticalAlignment="Top" Width="146" Height="52" Click="btn_Anwendungen_Click"/>
+
+    </Grid>
+</Window>

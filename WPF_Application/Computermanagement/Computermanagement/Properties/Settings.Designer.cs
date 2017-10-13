@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManagementApplikation.Properties
+namespace Computermanagement.Properties
 {
 
 
