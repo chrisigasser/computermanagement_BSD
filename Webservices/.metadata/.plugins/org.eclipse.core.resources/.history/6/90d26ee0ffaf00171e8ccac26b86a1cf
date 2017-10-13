@@ -52,14 +52,15 @@ public class UserService {
 		try {
 			ArrayList<Hardware> all = _getAllHardware();
 			
+			JSONArray allJSON = new JSONArray();
 			for(Hardware h : all) {
 				if(h.getId() == hid)
-				return h.toJson().toJSONString();
+				allJSON.add(h.toJson());
 			}
+			return allJSON.toJSONString();
 		} catch (SQLException e) {
 			return "SQLException";
 		}
-		return "{}";
 	}
 	
 	private ArrayList<Hardware> _getAllHardware() throws SQLException {

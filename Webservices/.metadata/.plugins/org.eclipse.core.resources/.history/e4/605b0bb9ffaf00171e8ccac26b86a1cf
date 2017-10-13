@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.sql.RowSet;
-import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET; 
@@ -43,23 +42,6 @@ public class UserService {
 		} catch (SQLException e) {
 			return "SQLException";
 		}
-	}
-	
-	@GET
-	@Path("/hardware/{hid}")
-	@Produces(MediaType.APPLICATION_JSON) 
-	public String getSingleHardware(@PathParam("hid") int hid) {
-		try {
-			ArrayList<Hardware> all = _getAllHardware();
-			
-			for(Hardware h : all) {
-				if(h.getId() == hid)
-				return h.toJson().toJSONString();
-			}
-		} catch (SQLException e) {
-			return "SQLException";
-		}
-		return "{}";
 	}
 	
 	private ArrayList<Hardware> _getAllHardware() throws SQLException {
