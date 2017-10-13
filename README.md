@@ -1,4 +1,11 @@
 # Statusberichte
+## 13.10.2017
+* Implementation of Basic REST Webservice
+* WPF
+    * Building GUIs from the Mockup
+    * classes and managerclasses for the Anwendung and Hardware Views
+* ...and more crazy 1337 Hackersh*t
+
 ## 06.10.2017
 * EERD created
 	* for ASCII Art see Oracle_Database Folder
