@@ -1,0 +1,6 @@
+package at.Hardwaremanagement;
+@Path("/UserService")
+
+public class UserService {
+
+}

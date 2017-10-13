@@ -1,1 +1,16 @@
 C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\bin\Debug\ManagementApplikation.exe.config
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\bin\Debug\ManagementApplikation.exe
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\bin\Debug\ManagementApplikation.pdb
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\Hardwaremanagement.g.cs
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\MainWindow.g.cs
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\App.g.cs
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation_MarkupCompile.cache
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation_MarkupCompile.lref
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\Hardwaremanagement.baml
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\MainWindow.baml
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.g.resources
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.Properties.Resources.resources
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.csproj.GenerateResource.Cache
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.exe
+C:\Users\admin\Documents\GitHub\computermanagement_BSD\WPF_Application\Computermanagement\ManagementApplikation\obj\Debug\ManagementApplikation.pdb

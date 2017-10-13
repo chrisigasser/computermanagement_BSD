@@ -1,0 +1,5 @@
+package at.Database;
+
+public class ConnectionFactory {
+
+}
