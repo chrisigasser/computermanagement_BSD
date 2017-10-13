@@ -116,6 +116,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComputermanagementClasses\ComputermanagementClasses.csproj">
+      <Project>{fe0ad93c-a6f3-43af-9e14-6cb6e809c6dc}</Project>
+      <Name>ComputermanagementClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

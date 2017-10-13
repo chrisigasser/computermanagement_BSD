@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputermanagementClasses
 {
-    class Hardware : IComparable<Hardware>
+    public class Hardware
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -34,9 +34,9 @@ namespace ComputermanagementClasses
             this.description = tocopy.description;
         }
 
-        public int CompareTo(Hardware other)
+        public override string ToString()
         {
-            return (other.id - this.id);
+            return this.name;
         }
     }
 }

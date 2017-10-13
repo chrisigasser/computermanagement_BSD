@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputermanagementClasses
 {
-    class Anwendungsmanager
+    public static class Anwendungsmanager
     {
 
     }
