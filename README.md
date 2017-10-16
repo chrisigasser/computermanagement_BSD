@@ -4,7 +4,8 @@
 * WPF
     * Building GUIs from the Mockup
     * classes and managerclasses for the Anwendung and Hardware Views
-* ...and more crazy 1337 Hackersh*t
+* Oracle
+	* Logical Model
 
 ## 06.10.2017
 * EERD created
