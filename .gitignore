@@ -240,3 +240,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# eclipse project file
+.settings/
+.classpath
+.project
