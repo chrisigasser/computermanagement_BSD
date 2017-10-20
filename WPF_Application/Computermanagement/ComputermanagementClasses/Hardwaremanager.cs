@@ -37,6 +37,7 @@ namespace ComputermanagementClasses
         }
         public static List<Hardware> getallHardware()
         {
+            RestCall.makeRestCall("http://192.168.194.150:8080/RESTOracle/rest/UserService/hardware", "");
             return allHardware.ToList();
         }
     }
