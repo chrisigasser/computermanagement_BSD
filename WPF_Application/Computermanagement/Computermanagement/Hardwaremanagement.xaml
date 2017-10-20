@@ -48,8 +48,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" x:Name="label_header" Content="Available Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30"/>
-        <ListBox Grid.Column="0" Grid.Row="2" Grid.RowSpan="16" Grid.ColumnSpan="5" x:Name="lb_ListOfHardware" HorizontalAlignment="Left" Height="343" Margin="10,40,0,0" VerticalAlignment="Top" Width="205" ItemsSource="{Binding listOfHardware}" SelectionChanged="hardwareSelectionChanged">
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" x:Name="label_header" Content="Available Hardware&#xD;&#xA;"/>
+        <ListBox Grid.Column="0" Grid.Row="2" Grid.RowSpan="15" Grid.ColumnSpan="5" x:Name="lb_ListOfHardware" ItemsSource="{Binding listOfHardware}" SelectionChanged="hardwareSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -58,15 +58,15 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label x:Name="label_name" Content="Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="275,83,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="image_hardwarepic" HorizontalAlignment="Left" Source="Computermanagement/data/logos/thinkstation.jpg" Height="180" Margin="324,271,0,0" VerticalAlignment="Top" Width="258"/>
-        <TextBox x:Name="textbox_name" HorizontalAlignment="Left" Margin="324,87,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
-        <Label x:Name="label_logopath" Content="Logopath" HorizontalAlignment="Left" Margin="263,110,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textbox_logopath" HorizontalAlignment="Left" Margin="324,112,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
-        <Button x:Name="button_createNew" Content="create new" HorizontalAlignment="Left" Margin="666,83,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="button_save" Content="save" HorizontalAlignment="Left" Margin="666,112,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="button_delete" Content="delete" HorizontalAlignment="Left" Margin="666,145,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textbox_description" MaxLines="100" HorizontalAlignment="Left" Height="123" Margin="324,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258"/>
-        <Label x:Name="label_description" Content="Description" HorizontalAlignment="Left" Margin="249,142,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="label_name" Content="Name:"/>
+        <TextBox Grid.Column="8" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" x:Name="textbox_name"/>
+        <Label Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="label_logopath" Content="Logopath"/>
+        <TextBox Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="5" Grid.RowSpan="1" x:Name="textbox_logopath" />
+        <Label Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="label_description" Content="Description"/>
+        <TextBox Grid.Column="8" Grid.Row="7" Grid.ColumnSpan="5" Grid.RowSpan="5" x:Name="textbox_description"/>
+        <Image Grid.Column="5" Grid.Row="13" Grid.ColumnSpan="7" Grid.RowSpan="5" x:Name="image_hardwarepic" HorizontalAlignment="Left" Source="Computermanagement/data/logos/thinkstation.jpg"/>
+        <Button Grid.Column="15" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_createNew" Content="create new"/>
+        <Button Grid.Column="15" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_save" Content="save"/>
+        <Button Grid.Column="15" Grid.Row="10" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_delete" Content="delete"/>
     </Grid>
 </Window>
