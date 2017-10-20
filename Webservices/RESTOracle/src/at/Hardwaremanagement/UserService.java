@@ -1,13 +1,14 @@
 package at.Hardwaremanagement;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.sql.RowSet;
-import javax.websocket.server.PathParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET; 
@@ -21,11 +22,13 @@ import org.json.simple.JSONObject;
 
 import at.Database.ConnectionFactory;
 import at.Objects.Hardware;
+import at.Objects.Housing;
+import at.Objects.Room;
 
 @Path("/UserService")
 
 public class UserService {
-	//http://localhost:8080/RESTOracle/rest/UserService/<PATH>
+	//http://192.168.194.150:8080/RESTOracle/rest/UserService/<PATH>
 	//ResultSet beginnt mit zählen bei 1!!!!
 	
 	@GET 
@@ -60,6 +63,72 @@ public class UserService {
 			return "SQLException";
 		}
 		return "{}";
+	}
+	
+	@GET
+	@Path("/housing")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllHousings() {
+		try {
+			ArrayList<Housing> all = _getAllHousing();
+			
+			JSONArray allJSON = new JSONArray();
+			for(Housing h : all) {
+				allJSON.add(h.toJson());
+			}
+			return allJSON.toJSONString();
+		} catch (SQLException e) {
+			return "SQLException";
+		}
+	}
+	
+	@GET
+	@Path("/housing/{houseid}")
+	@Produces(MediaType.APPLICATION_JSON) 
+	public String getSingleHousing(@PathParam("houseid") int hid) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement prepStmt = conn.prepareStatement("select h.id as houseID, h.name as houseName, r.id as roomID, r.Name as roomName from housing h JOIN room r ON h.id = r.HOUSING where h.id = ?");
+			prepStmt.setInt(1, hid);
+			ResultSet rs = prepStmt.executeQuery();
+			
+			
+			JSONArray allRooms = new JSONArray();
+			Housing h = null;
+			while (rs.next()) {
+				if(h == null) {
+					h = new Housing(rs.getInt(1), rs.getString(2));
+				}
+				allRooms.add(new Room(rs.getInt(3), rs.getString(4), h).toJson());
+			}
+			
+			rs.close();
+			prepStmt.close();
+			conn.close();
+			
+			if(h != null) {
+				return h.toJSON(allRooms).toJSONString();
+			}
+		} catch (SQLException e) {
+			return "SQLException";
+		}
+		return "{}";
+	}
+	
+	private ArrayList<Housing> _getAllHousing() throws SQLException {
+		ArrayList<Housing> all = new ArrayList<Housing>();
+		Connection conn = ConnectionFactory.get();
+		
+		Statement stmt = ConnectionFactory.get().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet res = stmt.executeQuery("select id, name from housing");
+		while (res.next()) {
+			all.add(new Housing(res.getInt(1), res.getString(2)));
+		}
+		res.close();
+		stmt.close();
+		conn.close();
+		
+		return all;
 	}
 	
 	private ArrayList<Hardware> _getAllHardware() throws SQLException {

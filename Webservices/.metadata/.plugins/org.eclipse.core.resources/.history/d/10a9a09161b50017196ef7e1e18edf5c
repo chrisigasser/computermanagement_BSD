@@ -1,0 +1,9 @@
+package at.Objects;
+
+public class Room {
+	private int id;
+	private String name;
+	
+	private Housing myHousing;
+
+}

@@ -34,6 +34,7 @@ public class Hardware {
 	
 	public JSONObject toJson() {
 		JSONObject me = new JSONObject();
+		me.put("type", "Hardware");
 		me.put("id", id);
 		me.put("name", name);
 		me.put("logo", logo);

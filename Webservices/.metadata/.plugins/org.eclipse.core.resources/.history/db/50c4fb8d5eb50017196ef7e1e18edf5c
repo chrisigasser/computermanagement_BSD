@@ -1,0 +1,10 @@
+package at.Objects;
+
+public class Housing {
+	
+	private int id;
+	private String name;
+	
+	
+
+}
