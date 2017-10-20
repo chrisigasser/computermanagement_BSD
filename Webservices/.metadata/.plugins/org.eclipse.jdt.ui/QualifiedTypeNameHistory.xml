@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.ws.rs.Path"/>
-<fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="javax.sql.RowSet"/>
-<fullyQualifiedTypeName name="at.Database.ConnectionFactory"/>
 <fullyQualifiedTypeName name="javax.ws.rs.Consumes"/>
 <fullyQualifiedTypeName name="javax.ws.rs.QueryParam"/>
 <fullyQualifiedTypeName name="javax.ws.rs.DefaultValue"/>
-<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
-<fullyQualifiedTypeName name="at.Objects.Hardware"/>
-<fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
 <fullyQualifiedTypeName name="javax.websocket.server.PathParam"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="at.Objects.Housing"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="at.Database.ConnectionFactory"/>
+<fullyQualifiedTypeName name="at.Objects.Room"/>
+<fullyQualifiedTypeName name="at.Objects.Hardware"/>
+<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
+<fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
+<fullyQualifiedTypeName name="at.Objects.roomHasHardware"/>
 </qualifiedTypeNameHistroy>

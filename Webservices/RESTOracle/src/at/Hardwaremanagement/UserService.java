@@ -24,6 +24,7 @@ import at.Database.ConnectionFactory;
 import at.Objects.Hardware;
 import at.Objects.Housing;
 import at.Objects.Room;
+import at.Objects.roomHasHardware;
 
 @Path("/UserService")
 
@@ -115,11 +116,89 @@ public class UserService {
 		return "{}";
 	}
 	
+	@GET
+	@Path("/room")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllRooms() {
+		try {
+			JSONArray allJSON = new JSONArray();
+			
+			Connection conn = ConnectionFactory.get();
+			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ResultSet res = stmt.executeQuery("select id, name, housing from room");
+			while (res.next()) {
+				Room r = new Room(res.getInt(1), res.getString(2), null);
+				allJSON.add(r.toJson(res.getInt(3)));
+			}
+			res.close();
+			stmt.close();
+			conn.close();
+			
+			
+			
+			return allJSON.toJSONString();
+		} catch (SQLException e) {
+			return "SQLException";
+		}
+	}
+	
+	@GET
+	@Path("/room/{roomID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllRooms(@PathParam("roomID") int roomID) {
+		try {
+			JSONObject room = null;
+			
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement prepStmt = conn.prepareStatement("select rh.id as hasID, rh.name as name, h.id as hardwareID, h.name as hardwareName, h.logo as logo, r.id as roomID, r.housing as housingID, r.Name as roomName from roomHasHardware rh JOIN room r ON rh.roomid = r.id JOIN hardware h ON rh.HARDWAREID = h.id where r.id = ? order by h.id");
+			prepStmt.setInt(1, roomID);
+			ResultSet rs = prepStmt.executeQuery();
+			
+			Room thisRoom = null;
+			int housingID = -1;
+			Hardware curr = null;
+			JSONArray hardware = new JSONArray();
+			JSONArray hasInRoom = new JSONArray();
+			while (rs.next()) {
+				if(thisRoom == null) {
+					thisRoom = new Room(rs.getInt("ROOMID"), rs.getString("ROOMNAME"), null);
+					housingID = rs.getInt("HOUSINGID");
+					curr = new Hardware(rs.getInt("HARDWAREID"), rs.getString("HARDWARENAME"), rs.getString("LOGO"));
+				}
+				
+				if(curr.getId() != rs.getInt("HARDWAREID")) {
+					JSONObject currHW = curr.toJson();
+					currHW.put("hasInRoom", hasInRoom);
+					hardware.add(currHW);
+					curr = new Hardware(rs.getInt("HARDWAREID"), rs.getString("HARDWARENAME"), rs.getString("LOGO"));
+					hasInRoom = new JSONArray();
+				}
+				roomHasHardware rhh = new roomHasHardware(thisRoom, curr, rs.getString("NAME"), rs.getInt("HASID"));
+				hasInRoom.add(rhh.toJSONwithoutHardwareOrRoom());
+			}
+			JSONObject currHW = curr.toJson();
+			currHW.put("hasInRoom", hasInRoom);
+			hardware.add(currHW);
+			room = thisRoom.toJson();
+			room.put("myHardware", hardware);
+			rs.close();
+			prepStmt.close();
+			conn.close();
+			
+			
+			
+			return room.toJSONString();
+		} catch (SQLException e) {
+			return "SQLException";
+		}
+		
+		
+	}
+	
 	private ArrayList<Housing> _getAllHousing() throws SQLException {
 		ArrayList<Housing> all = new ArrayList<Housing>();
 		Connection conn = ConnectionFactory.get();
-		
-		Statement stmt = ConnectionFactory.get().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ResultSet res = stmt.executeQuery("select id, name from housing");
 		while (res.next()) {
 			all.add(new Housing(res.getInt(1), res.getString(2)));
@@ -135,7 +214,7 @@ public class UserService {
 		ArrayList<Hardware> all = new ArrayList<Hardware>();
 		Connection conn = ConnectionFactory.get();
 		
-		Statement stmt = ConnectionFactory.get().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		ResultSet res = stmt.executeQuery("select id, name, logo from hardware");
 		while (res.next()) {
 			all.add(new Hardware(res.getInt(1), res.getString(2), res.getString(3)));

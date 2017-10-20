@@ -39,5 +39,11 @@ public class Room {
 		
 		return me;
 	}
+	
+	public JSONObject toJson(int housingID) {
+		JSONObject me = toJson();
+		me.put("housing", housingID);
+		return me;
+	}
 
 }
