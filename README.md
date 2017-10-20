@@ -1,4 +1,13 @@
 # Statusberichte
+## 20.10.2017
+* updated ERD
+* WPF
+    * Changed to Grid design
+    * First REST-Calls
+    * Json Parser
+* Oracle
+    * Inserts
+* updated REST API
 ## 13.10.2017
 * Implementation of Basic REST Webservice
 * WPF
@@ -9,7 +18,6 @@
 
 ## 06.10.2017
 * EERD created
-	* for ASCII Art see Oracle_Database Folder
 * inserts + trigger tested
 * Most important Mockups
     * Hardwaremanagement
