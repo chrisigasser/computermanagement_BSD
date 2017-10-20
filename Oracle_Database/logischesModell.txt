@@ -11,6 +11,7 @@ FK: housing references housing(id)
 roomHAShardware(id, hardwareID, roomID, name)
 SK: id
 FK: hardwareID references hardware(id)
+    roomID references room(id)
 
 networkInfo(part, isDHCP, additionalInfo)
 SK: part
