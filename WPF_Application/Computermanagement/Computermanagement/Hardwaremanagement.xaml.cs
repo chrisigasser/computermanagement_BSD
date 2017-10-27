@@ -26,16 +26,23 @@ namespace Computermanagement
         {
             InitializeComponent();
             listOfHardware = new List<Hardware>();
+            
             Init();
         }
 
         private void Init()
         {
-            Hardwaremanager.addHardware(new Hardware(1, "Test01", "Test01.jpg", "Test01 pic"));
-            Hardwaremanager.addHardware(new Hardware(2, "Test02", "Test02.jpg", "Test02 pic"));
-            Hardwaremanager.addHardware(new Hardware(3, "Test03", "Test03.jpg", "Test03 pic"));
+            //Hardwaremanager.addHardware(new Hardware("1", "Test01", "Test01.jpg", "Test01 pic"));
+            //Hardwaremanager.addHardware(new Hardware("2", "Test02", "Test02.jpg", "Test02 pic"));
+            //Hardwaremanager.addHardware(new Hardware("3", "Test03", "Test03.jpg", "Test03 pic"));
+            loadHardwareRestCall();
             refreshGUI();
             setStatusOfInputs(false);
+        }
+
+        private void loadHardwareRestCall()
+        {
+            this.listOfHardware = Hardwaremanager.getallHardware();
         }
 
         private void setStatusOfInputs(bool status)
@@ -51,15 +58,14 @@ namespace Computermanagement
 
         private void refreshGUI()
         {
-            this.listOfHardware = Hardwaremanager.getallHardware();
             this.lb_ListOfHardware.ItemsSource = this.listOfHardware;
 
             if(this.selectedHardware != null)
             {
                 setStatusOfInputs(true);
-                this.textbox_description.Text = this.selectedHardware.description;
+                this.textbox_description.Text = this.selectedHardware.desc;
                 this.textbox_name.Text = this.selectedHardware.name;
-                this.textbox_logopath.Text = this.selectedHardware.logopath;
+                this.textbox_logopath.Text = this.selectedHardware.logo;
             }
             else
             {

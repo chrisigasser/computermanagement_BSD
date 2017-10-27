@@ -11,8 +11,11 @@ namespace ComputermanagementClasses
 {
     static class RestCall
     {
+        private static string ipOfRestServer = "http://192.168.197.41:8080/RESTOracle/rest/UserService";
+
         public static string makeRestCall(string URL, string urlParameters)
         {
+            URL = ipOfRestServer + URL;
             string dataObject = null;
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL);
@@ -30,7 +33,7 @@ namespace ComputermanagementClasses
                 
                 //foreach (var d in dataObjects)
                 //{
-                    MessageBox.Show(dataObject);
+                    //MessageBox.Show(dataObject);
                 //}
             }
             else

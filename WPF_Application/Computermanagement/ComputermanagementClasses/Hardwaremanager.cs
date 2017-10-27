@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ComputermanagementClasses
 {
@@ -37,7 +39,9 @@ namespace ComputermanagementClasses
         }
         public static List<Hardware> getallHardware()
         {
-            RestCall.makeRestCall("http://192.168.194.150:8080/RESTOracle/rest/UserService/hardware", "");
+            string response = RestCall.makeRestCall("/hardware", "");
+            Hardware[] result = JsonConvert.DeserializeObject<Hardware[]>(response);
+            allHardware = new HashSet<Hardware>(result);
             return allHardware.ToList();
         }
     }

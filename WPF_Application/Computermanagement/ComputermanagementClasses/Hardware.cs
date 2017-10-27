@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,30 +9,41 @@ namespace ComputermanagementClasses
 {
     public class Hardware
     {
+        [JsonProperty("id")]
         public int id { get; set; }
+        [JsonProperty("name")]
         public string name { get; set; }
-        public string logopath { get; set; }
-        public string description { get; set; }
-        public Hardware(int id, string name, string logopath, string description)
+        [JsonProperty("logo")]
+        public string logo { get; set; }
+        [JsonProperty("type")]
+        public string type { get; set; }
+        [JsonProperty("desc")]
+        public string desc { get; set; }
+        public Hardware()
+        {
+
+        }
+        public Hardware(int id, string name, string logopath, string type, string desc)
         {
             this.id = id;
             this.name = name;
-            this.logopath = logopath;
-            this.description = description;
+            this.logo = logopath;
+            this.type = type;
+            this.desc = desc;
         }
-        public Hardware(string name, string logopath, string description)
+        public Hardware(string name, string logo, string type, string desc)
         {
             this.name = name;
-            this.logopath = logopath;
-            this.description = description;
-
+            this.logo = logo;
+            this.type = type;
+            this.desc = desc;
         }
         public Hardware(Hardware tocopy)
         {
             this.id = tocopy.id;
             this.name = tocopy.name;
-            this.logopath = tocopy.logopath;
-            this.description = tocopy.description;
+            this.logo = tocopy.logo;
+            this.type = tocopy.type;
         }
 
         public override string ToString()
