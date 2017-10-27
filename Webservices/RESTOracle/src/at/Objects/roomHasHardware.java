@@ -6,9 +6,10 @@ import org.json.simple.JSONObject;
 public class roomHasHardware {
 	private Room myRoom = null;
 	private Hardware myType = null;
-	
 	private String name = null;
 	private int id;
+	
+	
 	public Room getMyRoom() {
 		return myRoom;
 	}
