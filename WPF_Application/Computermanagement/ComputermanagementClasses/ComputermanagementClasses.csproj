@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Anwendung.cs" />
     <Compile Include="Anwendungsmanager.cs" />
+    <Compile Include="HardwareForRoom.cs" />
     <Compile Include="Housing.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Hardwaremanager.cs" />

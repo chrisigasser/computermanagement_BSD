@@ -16,12 +16,13 @@ namespace ComputermanagementClasses
             string response = RestCall.makeRestCall("/housing", "");
             Housing[] result = JsonConvert.DeserializeObject<Housing[]>(response);
             allHousings = new List<Housing>(result);
-            return allHousings.ToList();
+            return new List<Housing>(allHousings);
         }
 
-        public static List<Room> getAllRoomsForHousing(Housing housing)
+        public static Housing getAllRoomsForHousing(Housing housing)
         {
-            string response = RestCall.makeRestCall("/housing/" + housing.id, "");
+            //string response = RestCall.makeRestCall("/housing/" + housing.id, "");
+            string response = RestCall.makeRestCall("/housing", "");
             Housing result = JsonConvert.DeserializeObject<Housing>(response);
             for (int i = 0; i < allHousings.Count; i++)
             {
@@ -31,7 +32,7 @@ namespace ComputermanagementClasses
                     break;
                 }
             }
-            return result.rooms;
+            return result;
         }
     }
 }

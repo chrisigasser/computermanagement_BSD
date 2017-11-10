@@ -22,10 +22,12 @@ namespace Computermanagement
     {
         Housing selectedHousing = null;
         List<Housing> listOfHousings;
+        List<Room> listOfRoomsForHousing;
         public Overview()
         {
             InitializeComponent();
             listOfHousings = new List<Housing>();
+            listOfRoomsForHousing = new List<Room>();
             Init();
         }
 
@@ -43,45 +45,55 @@ namespace Computermanagement
 
         private void refreshGUI()
         {
-            this.comboBox_hardware.Items.Clear();
-            this.comboBox_Room.Items.Clear();
+            this.comboBox_housing.Items.Clear();
+            Console.WriteLine();
             foreach (Housing h in listOfHousings)
             {
-                this.comboBox_hardware.Items.Add(h.name);
+                this.comboBox_housing.Items.Add(h.name);
             }
-            if (selectedHousing!=null&&selectedHousing.rooms!=null)
+            Console.WriteLine();
+        }
+
+        private void housingSelected(object sender, SelectionChangedEventArgs e)
+        {
+            //Console.WriteLine(comboBox_housing.SelectedIndex);
+            if (this.comboBox_housing.SelectedIndex != -1)
+            {
+                this.selectedHousing = this.listOfHousings[this.comboBox_housing.SelectedIndex];
+                this.loadRoomsForHousingRestCall();
+                this.addRoomsToGUI();
+                //refreshGUI();
+            }
+            else
+            {
+                this.selectedHousing = null;
+                this.comboBox_Room.Items.Clear();
+            }
+        }
+
+        private void addRoomsToGUI()
+        {
+            this.comboBox_Room.Items.Clear();
+            if (selectedHousing != null && selectedHousing.rooms != null)
             {
                 foreach (Room r in selectedHousing.rooms)
                 {
                     this.comboBox_Room.Items.Add(r.name);
                 }
             }
-
         }
 
-        private void housingSelected(object sender, SelectionChangedEventArgs e)
-        {
-            if (this.comboBox_hardware.SelectedIndex != -1)
-            {
-                this.selectedHousing = this.listOfHousings[this.comboBox_hardware.SelectedIndex];
-                this.loadRoomsForHousingRestCall();
-            }
-            else
-            {
-                this.selectedHousing = null;
-            }
-
-            refreshGUI();
-        }
         private void loadHousingsRestCall()
         {
-            this.listOfHousings.Clear();
+            this.listOfHousings = new List<Housing>();
             this.listOfHousings = OverviewManager.getAllHousings();
         }
 
         private void loadRoomsForHousingRestCall()
         {
-            OverviewManager.getAllRoomsForHousing(this.selectedHousing);
+            this.selectedHousing = OverviewManager.getAllRoomsForHousing(this.selectedHousing);
         }
+
+        
     }
 }

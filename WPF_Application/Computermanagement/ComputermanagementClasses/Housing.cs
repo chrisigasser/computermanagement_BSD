@@ -27,6 +27,13 @@ namespace ComputermanagementClasses
             this.name = name;
             this.type = type;
             this.rooms = rooms;
+           
+        }
+
+        
+        public override string ToString()
+        {
+            return this.name;
         }
     }
 }
