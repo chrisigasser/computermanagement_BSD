@@ -56,6 +56,8 @@ create table roomHAShardware (
 	name varchar2(100)
 );
 
+alter table roomHAShardware add constraint uniqueRoomName unique (name, roomID);
+
 create table networkInfo (
   part int references roomHAShardware(id),
   isDHCP Number(1,0),
