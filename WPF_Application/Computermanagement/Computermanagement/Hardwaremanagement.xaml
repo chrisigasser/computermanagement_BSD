@@ -64,7 +64,7 @@
         <TextBox Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="5" Grid.RowSpan="1" x:Name="textbox_logopath" />
         <Label Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="label_description" Content="Description"/>
         <TextBox Grid.Column="8" Grid.Row="7" Grid.ColumnSpan="5" Grid.RowSpan="5" x:Name="textbox_description"/>
-        <Image Grid.Column="5" Grid.Row="13" Grid.ColumnSpan="7" Grid.RowSpan="5" x:Name="image_hardwarepic" HorizontalAlignment="Left" Source="Computermanagement/data/logos/thinkstation.jpg"/>
+        <Image Grid.Column="5" Grid.Row="13" Grid.ColumnSpan="7" Grid.RowSpan="5" x:Name="image_hardwarepic" HorizontalAlignment="Left"/>
         <Button Grid.Column="15" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_createNew" Content="create new"/>
         <Button Grid.Column="15" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_save" Content="save"/>
         <Button Grid.Column="15" Grid.Row="10" Grid.ColumnSpan="3" Grid.RowSpan="1" x:Name="button_delete" Content="delete"/>

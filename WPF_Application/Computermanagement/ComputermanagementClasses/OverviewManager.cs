@@ -13,26 +13,56 @@ namespace ComputermanagementClasses
         private static List<Housing> allHousings;
         public static List<Housing> getAllHousings()
         {
-            string response = RestCall.makeRestCall("/housing", "");
-            Housing[] result = JsonConvert.DeserializeObject<Housing[]>(response);
-            allHousings = new List<Housing>(result);
-            return new List<Housing>(allHousings);
+            try
+            {
+                string response = RestCall.makeRestCall("/housing", "");
+                Housing[] result = JsonConvert.DeserializeObject<Housing[]>(response);
+                allHousings = new List<Housing>(result);
+                return new List<Housing>(allHousings);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public static Housing getAllRoomsForHousing(Housing housing)
         {
-            //string response = RestCall.makeRestCall("/housing/" + housing.id, "");
-            string response = RestCall.makeRestCall("/housing", "");
-            Housing result = JsonConvert.DeserializeObject<Housing>(response);
-            for (int i = 0; i < allHousings.Count; i++)
+            try
             {
-                if(result.id == allHousings[i].id)
+                string response = RestCall.makeRestCall("/housing/" + housing.id, "");
+
+                Housing result = JsonConvert.DeserializeObject<Housing>(response);
+                for (int i = 0; i < allHousings.Count; i++)
                 {
-                    allHousings[i] = result;
-                    break;
+                    if (result.id == allHousings[i].id)
+                    {
+                        allHousings[i] = result;
+                        break;
+                    }
                 }
+                return result;
             }
-            return result;
+            catch (Exception)
+            {
+                return null;
+            }
+            
+        }
+
+        public static List<HardwareForRoom> getHardwareForRoom(Room room)
+        {
+            string response = RestCall.makeRestCall("/room/" + room.id, "");
+            try
+            {
+                HardwareForRoom[] wholeHardware = JsonConvert.DeserializeObject<HardwareForRoom[]>(response);
+                return new List<HardwareForRoom>(wholeHardware);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

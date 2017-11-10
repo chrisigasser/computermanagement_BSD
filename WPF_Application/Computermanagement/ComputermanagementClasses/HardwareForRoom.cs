@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComputermanagementClasses
 {
-    class HardwareForRoom
+    public class HardwareForRoom
     {
         [JsonProperty("id")]
         public int id { get; set; }

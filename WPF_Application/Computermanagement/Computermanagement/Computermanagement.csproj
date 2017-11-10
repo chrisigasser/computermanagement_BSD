@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Hardwaredetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Hardwaremanagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +77,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Hardwaredetails.xaml.cs">
+      <DependentUpon>Hardwaredetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Hardwaremanagement.xaml.cs">
       <DependentUpon>Hardwaremanagement.xaml</DependentUpon>

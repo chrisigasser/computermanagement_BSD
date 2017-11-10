@@ -15,8 +15,7 @@ namespace ComputermanagementClasses
         public string id { get; set; }
         [JsonProperty("type")]
         public string type { get; set; }
-        [JsonProperty("type")]
-        public string type { get; set; }
+        
         public Room()
         {
 

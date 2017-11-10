@@ -21,13 +21,16 @@ namespace Computermanagement
     public partial class Overview : Window
     {
         Housing selectedHousing = null;
+        Room selectedRoom = null;
         List<Housing> listOfHousings;
         List<Room> listOfRoomsForHousing;
+        List<HardwareForRoom> listOfHardwareForRoom;
         public Overview()
         {
             InitializeComponent();
             listOfHousings = new List<Housing>();
             listOfRoomsForHousing = new List<Room>();
+            listOfHardwareForRoom = new List<HardwareForRoom>();
             Init();
         }
 
@@ -56,13 +59,15 @@ namespace Computermanagement
 
         private void housingSelected(object sender, SelectionChangedEventArgs e)
         {
-            //Console.WriteLine(comboBox_housing.SelectedIndex);
+            selectedRoom = null;
+
             if (this.comboBox_housing.SelectedIndex != -1)
             {
                 this.selectedHousing = this.listOfHousings[this.comboBox_housing.SelectedIndex];
                 this.loadRoomsForHousingRestCall();
-                this.addRoomsToGUI();
-                //refreshGUI();
+
+                if(this.selectedHousing!=null)
+                    this.addRoomsToGUI();
             }
             else
             {
@@ -92,8 +97,69 @@ namespace Computermanagement
         private void loadRoomsForHousingRestCall()
         {
             this.selectedHousing = OverviewManager.getAllRoomsForHousing(this.selectedHousing);
+            this.listOfRoomsForHousing = this.selectedHousing.rooms;
         }
 
-        
+        private void roomSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.comboBox_Room.SelectedIndex != -1)
+            {
+                this.selectedRoom = this.listOfRoomsForHousing[this.comboBox_Room.SelectedIndex];
+                this.loadHardwareForRoomRestCall();
+
+                if(this.selectedRoom!=null)
+                    this.addHardwareToGUI();
+                
+            }
+            else
+            {
+                this.selectedRoom = null;
+                this.listBox_listofhardware.Items.Clear();
+            }
+        }
+
+        private void addHardwareToGUI()
+        {
+            this.listBox_listofhardware.Items.Clear();
+            if (selectedRoom != null && selectedHousing != null && this.listOfHardwareForRoom!=null)
+            {
+                foreach (HardwareForRoom h in listOfHardwareForRoom)
+                {
+                    this.listBox_listofhardware.Items.Add(h.name);
+                }
+            }
+        }
+
+        private void loadHardwareForRoomRestCall()
+        {
+            this.listOfHardwareForRoom = OverviewManager.getHardwareForRoom(this.selectedRoom);
+        }
+
+        private void hardwareSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBox_listofhardware.SelectedIndex != -1)
+            {
+                HardwareForRoom temp = listOfHardwareForRoom[listBox_listofhardware.SelectedIndex];
+                this.label_name.Content = temp.name;
+                this.label_type.Content = temp.;
+                this.label_desc.Content = temp.hdesc;
+            }
+            else
+            {
+                this.clearHardwareDetails();
+            }
+        }
+
+        private void clearHardwareDetails()
+        {
+            this.label_name.Content = "";
+            this.label_type.Content = "";
+            this.label_desc.Content = "";
+        }
+
+        private void button_displayinfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
