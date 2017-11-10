@@ -11,14 +11,20 @@ import javax.sql.RowSet;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET; 
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path; 
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import at.Database.ConnectionFactory;
 import at.Objects.Anwendung;
@@ -50,6 +56,22 @@ public class UserService {
 		} catch (SQLException e) {
 			return "SQLException";
 		}
+	}
+	
+	@POST
+	@Path("/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response addNewHardware(@FormParam("param1") String par) {
+		
+		
+		return Response.ok(par).build();
+		/*if(parName != null && parDesc != null) {
+			return Response.ok("insert into hardware VALUES('"+parName+"',"+parLogo==null?null:"'"+parLogo+"'"+",'"+parDesc+"')").build();
+		}
+		else {
+			return javax.ws.rs.core.Response.status(400).build();
+		}*/
 	}
 	
 	@GET
@@ -150,7 +172,6 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoom(@PathParam("roomID") int roomID) {
 		try {
-			JSONObject room = null;
 			
 			Connection conn = ConnectionFactory.get();
 			PreparedStatement prepStmt = conn.prepareStatement("select rh.id as hasID, rh.name as name, h.id as hardwareID, h.hdesc as hdesc, h.name as hardwareName, h.logo as logo, r.id as roomID, r.housing as housingID, r.Name as roomName from roomHasHardware rh JOIN room r ON rh.roomid = r.id JOIN hardware h ON rh.HARDWAREID = h.id where r.id = ? order by h.id");
@@ -159,8 +180,7 @@ public class UserService {
 			
 			Room thisRoom = null;
 			Hardware curr = null;
-			JSONArray hardware = new JSONArray();
-			JSONArray hasInRoom = new JSONArray();
+			JSONArray returner = new JSONArray();
 			while (rs.next()) {
 				if(thisRoom == null) {
 					thisRoom = new Room(rs.getInt("ROOMID"), rs.getString("ROOMNAME"), null);
@@ -168,22 +188,10 @@ public class UserService {
 				}
 				
 				if(curr.getId() != rs.getInt("HARDWAREID")) {
-					JSONObject currHW = curr.toJson();
-					currHW.put("hasInRoom", hasInRoom);
-					hardware.add(currHW);
 					curr = new Hardware(rs.getInt("HARDWAREID"), rs.getString("HARDWARENAME"), rs.getString("LOGO"), rs.getString("hdesc"));
-					hasInRoom = new JSONArray();
 				}
 				roomHasHardware rhh = new roomHasHardware(thisRoom, curr, rs.getString("NAME"), rs.getInt("HASID"));
-				hasInRoom.add(rhh.toJSONwithoutHardwareOrRoom());
-			}
-			JSONObject currHW;
-			if(curr != null) {
-				currHW = curr.toJson();
-				currHW.put("hasInRoom", hasInRoom);
-				hardware.add(currHW);
-				room = thisRoom.toJson();
-				room.put("myHardware", hardware);
+				returner.add(rhh.toJSONWithAllInfos());
 			}
 			rs.close();
 			prepStmt.close();
@@ -191,7 +199,7 @@ public class UserService {
 			
 			
 			
-			return (room==null)?"{}":room.toJSONString();
+			return (thisRoom==null)?"{}":returner.toJSONString();
 		} catch (SQLException e) {
 			return "SQLException";
 		}

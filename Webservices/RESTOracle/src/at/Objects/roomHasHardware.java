@@ -43,6 +43,20 @@ public class roomHasHardware {
 	}
 	
 	/**
+	 * Returns JSONObject containing name, id, roomID, hardwareID, hardwareName, HardwareLogo, HardwareDesc
+	 * @return JSONObject
+	 */
+	public JSONObject toJSONWithAllInfos() {
+		JSONObject me = toJSON();
+		me.put("hname", myType.getName());
+		me.put("hlogo", myType.getLogo());
+		me.put("hdesc", myType.getDesc());
+		
+		return me;
+	}
+	
+	
+	/**
 	 * Returns JSONObject containing name, id, roomID, hardwareID
 	 * @return JSONObject
 	 */
