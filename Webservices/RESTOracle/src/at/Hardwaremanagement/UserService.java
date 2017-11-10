@@ -174,7 +174,7 @@ public class UserService {
 		try {
 			
 			Connection conn = ConnectionFactory.get();
-			PreparedStatement prepStmt = conn.prepareStatement("select rh.id as hasID, rh.name as name, h.id as hardwareID, h.hdesc as hdesc, h.name as hardwareName, h.logo as logo, r.id as roomID, r.housing as housingID, r.Name as roomName from roomHasHardware rh JOIN room r ON rh.roomid = r.id JOIN hardware h ON rh.HARDWAREID = h.id where r.id = ? order by h.id");
+			PreparedStatement prepStmt = conn.prepareStatement("select rh.rhdesc as rhdesc, rh.id as hasID, rh.name as name, h.id as hardwareID, h.hdesc as hdesc, h.name as hardwareName, h.logo as logo, r.id as roomID, r.housing as housingID, r.Name as roomName from roomHasHardware rh JOIN room r ON rh.roomid = r.id JOIN hardware h ON rh.HARDWAREID = h.id where r.id = ? order by h.id");
 			prepStmt.setInt(1, roomID);
 			ResultSet rs = prepStmt.executeQuery();
 			
@@ -190,7 +190,7 @@ public class UserService {
 				if(curr.getId() != rs.getInt("HARDWAREID")) {
 					curr = new Hardware(rs.getInt("HARDWAREID"), rs.getString("HARDWARENAME"), rs.getString("LOGO"), rs.getString("hdesc"));
 				}
-				roomHasHardware rhh = new roomHasHardware(thisRoom, curr, rs.getString("NAME"), rs.getInt("HASID"));
+				roomHasHardware rhh = new roomHasHardware(thisRoom, curr, rs.getString("NAME"), rs.getInt("HASID"),  rs.getString("rhdesc"));
 				returner.add(rhh.toJSONWithAllInfos());
 			}
 			rs.close();
@@ -463,13 +463,13 @@ select info from furtherInformation where part = 12;
 	private roomHasHardware _getSingleRHH(int id) {
 		try {
 			Connection conn = ConnectionFactory.get();
-			PreparedStatement prepStmt = conn.prepareStatement("select rh.ID as rhID, rh.hardwareID as hwID, rh.roomid as roomID, rh.name as hwName from roomHAShardware rh where rh.id = ?");
+			PreparedStatement prepStmt = conn.prepareStatement("select rh.hdesc as hdesc, rh.ID as rhID, rh.hardwareID as hwID, rh.roomid as roomID, rh.name as hwName from roomHAShardware rh where rh.id = ?");
 			prepStmt.setInt(1, id);
 			ResultSet rs = prepStmt.executeQuery();
 			
 			roomHasHardware l = null;
 			while (rs.next()) {
-				l = new roomHasHardware(new Room(rs.getInt("roomID"), "", null), new Hardware(rs.getInt("hwID"), "", "", ""), rs.getString("hwName"), rs.getInt("rhID"));
+				l = new roomHasHardware(new Room(rs.getInt("roomID"), "", null), new Hardware(rs.getInt("hwID"), "", "", ""), rs.getString("hwName"), rs.getInt("rhID"), rs.getString("hdesc"));
 			}
 			
 			rs.close();

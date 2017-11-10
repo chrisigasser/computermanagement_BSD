@@ -7,9 +7,16 @@ public class roomHasHardware {
 	private Room myRoom = null;
 	private Hardware myType = null;
 	private String name = null;
+	private String desc = null;
 	private int id;
 	
 	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public Room getMyRoom() {
 		return myRoom;
 	}
@@ -34,16 +41,17 @@ public class roomHasHardware {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public roomHasHardware(Room myRoom, Hardware myType, String name, int id) {
+	public roomHasHardware(Room myRoom, Hardware myType, String name, int id, String desc) {
 		super();
 		this.myRoom = myRoom;
 		this.myType = myType;
 		this.name = name;
 		this.id = id;
+		this.desc = desc;
 	}
 	
 	/**
-	 * Returns JSONObject containing name, id, roomID, hardwareID, hardwareName, HardwareLogo, HardwareDesc
+	 * Returns JSONObject containing name, id, roomID, hardwareID, hardwareName, HardwareLogo, HardwareDesc, desc
 	 * @return JSONObject
 	 */
 	public JSONObject toJSONWithAllInfos() {
@@ -57,7 +65,7 @@ public class roomHasHardware {
 	
 	
 	/**
-	 * Returns JSONObject containing name, id, roomID, hardwareID
+	 * Returns JSONObject containing name, id, roomID, hardwareID, desc
 	 * @return JSONObject
 	 */
 	public JSONObject toJSON() {
@@ -68,7 +76,7 @@ public class roomHasHardware {
 	}
 	
 	/**
-	 * Returns JSONObject containing name, id, hardwareID
+	 * Returns JSONObject containing name, id, hardwareID, desc
 	 * @return JSONObject
 	 */
 	public JSONObject toJSONwithoutRoom() {
@@ -79,7 +87,7 @@ public class roomHasHardware {
 	}
 	
 	/**
-	 * Returns JSONObject containing name, id, roomID
+	 * Returns JSONObject containing name, id, roomID, desc
 	 * @return JSONObject
 	 */
 	public JSONObject toJSONwithoutHardware() {
@@ -89,7 +97,7 @@ public class roomHasHardware {
 	}
 	
 	/**
-	 * Returns JSONObject containing name, id
+	 * Returns JSONObject containing name, id, desc
 	 * @return JSONObject
 	 */
 	public JSONObject toJSONwithoutHardwareOrRoom() {
@@ -97,6 +105,7 @@ public class roomHasHardware {
 		me.put("type", "roomHasHardware");
 		me.put("id", id);
 		me.put("name", name);
+		me.put("desc", desc);
 		
 		return me;
 	}
