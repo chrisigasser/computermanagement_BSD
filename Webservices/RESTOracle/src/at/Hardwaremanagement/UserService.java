@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import javax.sql.RowSet;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path; 
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -62,17 +64,95 @@ public class UserService {
 	@Path("/hardware")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN) 
-	public Response addNewHardware(@FormParam("param1") String par) {
+	public Response addNewHardware(@FormParam("hname") String parName,
+								   @FormParam("hdesc") String parDesc,
+								   @FormParam("hlogo") String parLogo) {
 		
-		
-		return Response.ok(par).build();
-		/*if(parName != null && parDesc != null) {
-			return Response.ok("insert into hardware VALUES('"+parName+"',"+parLogo==null?null:"'"+parLogo+"'"+",'"+parDesc+"')").build();
+		try {
+			if(parName != null && parDesc != null) {
+				Connection conn = ConnectionFactory.get();
+				PreparedStatement stmt = conn.prepareStatement("insert into hardware VALUES(?,?,?,?)");
+				
+				Statement highes = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ResultSet res = highes.executeQuery("select MAX(id) as max from hardware");
+				int max = -1;
+				while (res.next()) {
+					max = res.getInt("max");
+				}
+				res.close();
+				highes.close();
+				max++;
+				
+				stmt.setInt(1, max);
+				stmt.setString(2, parName);
+				stmt.setString(4, parDesc);
+				stmt.setString(3, parLogo);
+				
+				
+				int inserted = stmt.executeUpdate();
+				stmt.close();
+				conn.close();
+				return Response.ok(inserted).build();
+			}
+			else {
+				return javax.ws.rs.core.Response.status(400).build();
+			}
 		}
-		else {
-			return javax.ws.rs.core.Response.status(400).build();
-		}*/
+		catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
 	}
+	
+	@DELETE
+	@Path("/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response deleteHardware(@FormParam("hid") int parId) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement stmt = conn.prepareStatement("delete from hardware where id = ?");
+			
+			stmt.setInt(1, parId);
+			
+			
+			int del = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			return Response.ok(del).build();
+			
+		} catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
+	
+	@PUT
+	@Path("/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response updateHardware(@FormParam("hid") int parId,
+								   @FormParam("hlogo") String parLogo,
+								   @FormParam("hdesc") String parDesc,
+								   @FormParam("hname") String parName) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement stmt = conn.prepareStatement("update hardware set logo = ?, name = ?, hdesc = ? where id = ?");
+			
+			stmt.setString(1, parLogo);
+			stmt.setString(2, parName);
+			stmt.setString(3, parDesc);
+			stmt.setInt(4, parId);
+			
+			
+			int up = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			return Response.ok(up).build();
+			
+		} catch(Exception ex) {
+			return Response.status(500).build();
+		}
+	}
+	
 	
 	@GET
 	@Path("/hardware/{hid}")
@@ -269,6 +349,95 @@ public class UserService {
 		}
 	}
 	
+	@POST
+	@Path("/application")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response addNewApp(@FormParam("aname") String parName,
+							  @FormParam("adesc") String parDesc) {
+		
+		try {
+			if(parName != null && parDesc != null) {
+				Connection conn = ConnectionFactory.get();
+				PreparedStatement stmt = conn.prepareStatement("insert into anwendung VALUES(?,?,?)");
+				
+				Statement highes = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ResultSet res = highes.executeQuery("select MAX(id) as max from anwendung");
+				int max = -1;
+				while (res.next()) {
+					max = res.getInt("max");
+				}
+				res.close();
+				highes.close();
+				max++;
+				
+				stmt.setInt(1, max);
+				stmt.setString(2, parName);
+				stmt.setString(3, parDesc);
+				
+				
+				int inserted = stmt.executeUpdate();
+				stmt.close();
+				conn.close();
+				return Response.ok(inserted).build();
+			}
+			else {
+				return javax.ws.rs.core.Response.status(400).build();
+			}
+		}
+		catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
+	
+	@DELETE
+	@Path("/application")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response deleteApp(@FormParam("aid") int aid) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement stmt = conn.prepareStatement("delete from anwendung where id = ?");
+			
+			stmt.setInt(1, aid);
+			
+			
+			int del = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			return Response.ok(del).build();
+			
+		} catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
+	
+	@PUT
+	@Path("/application")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response updateHardware(@FormParam("aid") int parid,
+								   @FormParam("aname") String parName,
+								   @FormParam("adesc") String parDesc) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement stmt = conn.prepareStatement("update anwendung set name = ?, adesc = ? where id = ?");
+			
+			stmt.setString(1, parName);
+			stmt.setString(2, parDesc);
+			stmt.setInt(3, parid);
+			
+			
+			int up = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			return Response.ok(up).build();
+			
+		} catch(Exception ex) {
+			return Response.status(500).build();
+		}
+	}
+	
 	@GET
 	@Path("/application/{appID}")
 	@Produces(MediaType.APPLICATION_JSON) 
@@ -301,18 +470,6 @@ public class UserService {
 	@Path("/room/hardware/{rhid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllInfoForHardwareInRoom(@PathParam("rhid") int rhid) {
-		/*
-select rh.ID as rhID, rh.hardwareID as hwID, rh.roomid as roomID, rh.name as hwName from roomHAShardware rh where rh.id = 12;
-select isDHCP, additionalInfo from networkInfo where part = 12;
-select DISTINCT isAD from allowedUser where part = 12;
---OR when isAD = 0
-select uname as uid from allowedUser where part = 12;
-select a.id, a.name, a.adesc from hasAnwendung ha JOIN Anwendung a ON ha.AnwendungsID = a.id where part = 12;
-select working from works where part = 12;
-select info from furtherInformation where part = 12;
-		 * 
-		 */
-		
 		roomHasHardware base = _getSingleRHH(rhid);
 
 		if(base != null) {
@@ -361,6 +518,72 @@ select info from furtherInformation where part = 12;
 		
 	}
 	
+	@POST
+	@Path("/room/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response addHardwareToRoom(@FormParam("hid") int parHardware,
+							          @FormParam("roomID") int parRoom,
+							          @FormParam("name") String parName,
+							          @FormParam("rhdesc") String parDesc) {
+		
+		try {
+			if(parName != null && parDesc != null) {
+				Connection conn = ConnectionFactory.get();
+				PreparedStatement stmt = conn.prepareStatement("insert into roomHAShardware VALUES(?,?,?,?,?)");
+				
+				Statement highes = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ResultSet res = highes.executeQuery("select MAX(id) as max from roomHAShardware");
+				int max = -1;
+				while (res.next()) {
+					max = res.getInt("max");
+				}
+				res.close();
+				highes.close();
+				max++;
+				
+				stmt.setInt(1, max);
+				stmt.setInt(2, parHardware);
+				stmt.setInt(3, parRoom);
+				stmt.setString(4, parName);
+				stmt.setString(5, parDesc);
+				
+				
+				int inserted = stmt.executeUpdate();
+				stmt.close();
+				conn.close();
+				return Response.ok(inserted).build();
+			}
+			else {
+				return javax.ws.rs.core.Response.status(400).build();
+			}
+		}
+		catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
+	
+	@DELETE
+	@Path("/room/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response deleteHardwareFromRoom(@FormParam("rhid") int rhid) {
+		try {
+			Connection conn = ConnectionFactory.get();
+			PreparedStatement stmt = conn.prepareStatement("delete from roomHasHardware where id = ?");
+			
+			stmt.setInt(1, rhid);
+			
+			
+			int del = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			return Response.ok(del).build();
+			
+		} catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
 	
 	
 	private JSONObject _getAllApplications(roomHasHardware base) {

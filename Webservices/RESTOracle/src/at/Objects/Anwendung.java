@@ -36,7 +36,7 @@ public class Anwendung {
 		me.put("type", "Application");
 		me.put("name", name);
 		me.put("desc", adesc);
-		
+		me.put("id", id);
 		return me;
 	}
 }
