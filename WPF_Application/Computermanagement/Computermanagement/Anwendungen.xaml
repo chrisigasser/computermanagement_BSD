@@ -1,0 +1,25 @@
+﻿<Window x:Class="Computermanagement.Anwendungen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computermanagement"
+        mc:Ignorable="d"
+        Title="Applications" Height="433.334" Width="773.149">
+    <Grid>
+        <Label x:Name="label" Content="Available Applications&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="343" Margin="10,40,0,0" VerticalAlignment="Top" Width="205">
+            <ListBoxItem IsSelected="True" Content="AutoCAD 2013"></ListBoxItem>
+            <ListBoxItem Content="AutoCAD 2015"></ListBoxItem>
+            <ListBoxItem Content="Office"></ListBoxItem>
+            <ListBoxItem Content="Internet Explorer Premium"></ListBoxItem>
+        </ListBox>
+        <Label x:Name="label2" Content="Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="262,83,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="label3" Text="AutoCAD 2013" HorizontalAlignment="Left" Margin="324,87,0,0" VerticalAlignment="Top" Height="21" Width="258"/>
+        <Label x:Name="label1" Content="Details" HorizontalAlignment="Left" Margin="262,107,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="label3_Copy" Text="For drawing very important Buildings" HorizontalAlignment="Left" Margin="324,112,0,0" VerticalAlignment="Top" Height="271" Width="258"/>
+        <Button x:Name="button" Content="create new" HorizontalAlignment="Left" Margin="666,83,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button1" Content="save" HorizontalAlignment="Left" Margin="666,112,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button2" Content="delete" HorizontalAlignment="Left" Margin="666,145,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

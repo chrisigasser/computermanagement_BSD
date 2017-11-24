@@ -1,0 +1,41 @@
+hardware(id, name, logo, hdesc)
+SK: id
+
+housing(id, name)
+SK: id
+
+room(id, name, shape, housing)
+SK: id
+FK: housing references housing(id)
+
+roomHAShardware(id, hardwareID, roomID, name)
+SK: id
+FK: hardwareID references hardware(id)
+    roomID references room(id)
+
+networkInfo(part, isDHCP, additionalInfo)
+SK: part
+
+anwendung(id, name, adesc)
+SK: id
+
+hasAnwendung(AnwendungsID, part)
+SK: AnwendungsID, part
+FK: AnwendungsID references anwendung(id)
+    part references roomHAShardware(id)
+
+avail_User(id, uname, udesc)
+SK: id
+
+allowedUser(id, part, isAD, uname)
+SK: id
+FK: part references roomHAShardware(id)
+    uname references avail_User(id)
+
+works(part, working)
+SK: part
+FK: part references roomHAShardware(id)
+
+furtherInformation(part, info)
+SK: part
+FK: part references roomHAShardware(id)
