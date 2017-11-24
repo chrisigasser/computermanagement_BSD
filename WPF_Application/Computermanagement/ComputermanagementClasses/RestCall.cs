@@ -48,39 +48,63 @@ namespace ComputermanagementClasses
 
         public static bool makePUTRestcall(string URL, NameValueCollection urlParameters)
         {
-            URL = ipOfRestServer + URL;
-            byte[] response = null;
-            using (WebClient client = new WebClient())
+            try
             {
-                response = client.UploadValues(URL, "PUT" ,urlParameters);
-            }
+                URL = ipOfRestServer + URL;
+                byte[] response = null;
+                using (WebClient client = new WebClient())
+                {
+                    response = client.UploadValues(URL, "PUT", urlParameters);
+                }
 
-            //Todo: check i successful
-            return true;
+                //Todo: check i successful
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         public static bool makePostRestcall(string URL, NameValueCollection urlParameters)
         {
-            URL = ipOfRestServer + URL;
-            byte[] response = null;
-            using (WebClient client = new WebClient())
+            try
             {
-                response = client.UploadValues(URL, urlParameters);
-            }
+                URL = ipOfRestServer + URL;
+                byte[] response = null;
+                using (WebClient client = new WebClient())
+                {
+                    response = client.UploadValues(URL, urlParameters);
+                }
 
-            //Todo: check i successful
-            return true;
+                //Todo: check i successful
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
         public static bool makeDELETERestcall(string URL, NameValueCollection urlParameters)
         {
-            URL = ipOfRestServer + URL;
-            byte[] response = null;
-            using (WebClient client = new WebClient())
+            try
             {
-                response = client.UploadValues(URL, "DELETE",urlParameters);
-            }
+                URL = ipOfRestServer + URL;
+                byte[] response = null;
+                using (WebClient client = new WebClient())
+                {
+                    response = client.UploadValues(URL, "DELETE", urlParameters);
+                }
 
-            return true;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }
