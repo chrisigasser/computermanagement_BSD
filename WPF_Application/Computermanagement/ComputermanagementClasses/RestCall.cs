@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,7 +14,7 @@ namespace ComputermanagementClasses
 {
     static class RestCall
     {
-        private static string ipOfRestServer = "http://192.168.193.98:8080/RESTOracle/rest/UserService";
+        private static string ipOfRestServer = "http://192.168.196.61:8080/RESTOracle/rest/UserService";
 
         public static string makeRestCall(string URL, string urlParameters)
         {
@@ -41,6 +44,43 @@ namespace ComputermanagementClasses
                 MessageBox.Show((int)response.StatusCode +" "+ response.ReasonPhrase);
             }
             return dataObject;
+        }
+
+        public static bool makePUTRestcall(string URL, NameValueCollection urlParameters)
+        {
+            URL = ipOfRestServer + URL;
+            byte[] response = null;
+            using (WebClient client = new WebClient())
+            {
+                response = client.UploadValues(URL, "PUT" ,urlParameters);
+            }
+
+            //Todo: check i successful
+            return true;
+        }
+
+        public static bool makePostRestcall(string URL, NameValueCollection urlParameters)
+        {
+            URL = ipOfRestServer + URL;
+            byte[] response = null;
+            using (WebClient client = new WebClient())
+            {
+                response = client.UploadValues(URL, urlParameters);
+            }
+
+            //Todo: check i successful
+            return true;
+        }
+        public static bool makeDELETERestcall(string URL, NameValueCollection urlParameters)
+        {
+            URL = ipOfRestServer + URL;
+            byte[] response = null;
+            using (WebClient client = new WebClient())
+            {
+                response = client.UploadValues(URL, "DELETE",urlParameters);
+            }
+
+            return true;
         }
     }
 }

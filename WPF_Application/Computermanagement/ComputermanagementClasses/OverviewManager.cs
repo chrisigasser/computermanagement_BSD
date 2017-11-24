@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +64,24 @@ namespace ComputermanagementClasses
             {
                 return null;
             }
+        }
+
+        public static void addHardwareForRoom(string roomid, string hid, string name, string rhdesc)
+        {
+            System.Collections.Specialized.NameValueCollection temp = new NameValueCollection() {
+                        { "roomID", roomid },
+                        { "name", name },
+                        { "rhdesc", rhdesc},
+                        { "hid", hid}
+            };
+            RestCall.makePostRestcall("/room/hardware", temp);  
+        }
+        public static void removeHardwareByObject(string id)
+        {
+            System.Collections.Specialized.NameValueCollection temp = new NameValueCollection() {
+                        { "rhid", ""+id }
+            };
+            RestCall.makeDELETERestcall("/room/hardware", temp);
         }
     }
 }

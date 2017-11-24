@@ -25,6 +25,7 @@ namespace Computermanagement
         List<Housing> listOfHousings;
         List<Room> listOfRoomsForHousing;
         List<HardwareForRoom> listOfHardwareForRoom;
+        HardwareForRoom selectedHardwareForroom;
         public Overview()
         {
             InitializeComponent();
@@ -133,6 +134,7 @@ namespace Computermanagement
         private void loadHardwareForRoomRestCall()
         {
             this.listOfHardwareForRoom = OverviewManager.getHardwareForRoom(this.selectedRoom);
+            //this.listBox_listofhardware.Items.Refresh();
         }
 
         private void hardwareSelected(object sender, SelectionChangedEventArgs e)
@@ -141,8 +143,10 @@ namespace Computermanagement
             {
                 HardwareForRoom temp = listOfHardwareForRoom[listBox_listofhardware.SelectedIndex];
                 this.label_name.Content = temp.name;
-                this.label_type.Content = temp.;
+                this.label_type.Content = temp.hname;
                 this.label_desc.Content = temp.hdesc;
+                
+                this.selectedHardwareForroom = temp;
             }
             else
             {
@@ -157,9 +161,42 @@ namespace Computermanagement
             this.label_desc.Content = "";
         }
 
-        private void button_displayinfo_Click(object sender, RoutedEventArgs e)
+        private void button_addhardware_Click(object sender, RoutedEventArgs e)
         {
+            NewHardwareForRoom newHardware = new NewHardwareForRoom(this);
+            newHardware.Show();
+        }
+        public void addNewHardwareForRoom(string hid, string name, string rhdesc)
+        {
+            Room selected = this.selectedRoom;
+            OverviewManager.addHardwareForRoom(this.selectedRoom.id,hid,name,rhdesc);
+            //loadHardwareForRoomRestCall();
+            addRoomsToGUI();
+            foreach (String s in comboBox_Room.Items)
+            {
+                if (s == selected.name)
+                {
+                    this.comboBox_Room.SelectedItem = s;
+                }
+            }
+        }
 
+        private void button_deletehardware_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedHardwareForroom != null)
+            {
+                Room selected = this.selectedRoom;
+                OverviewManager.removeHardwareByObject(this.selectedHardwareForroom.id+"");
+                //loadHardwareForRoomRestCall();
+                addRoomsToGUI();
+                foreach (String s in comboBox_Room.Items)
+                {
+                    if (s == selected.name)
+                    {
+                        this.comboBox_Room.SelectedItem = s;
+                    }
+                }
+            }
         }
     }
 }

@@ -13,9 +13,8 @@
         <Image x:Name="image" HorizontalAlignment="Left" Source="/data/Housings/Housing1.png" Height="249" Margin="17,48,0,0" VerticalAlignment="Top" Width="550"/>
         <Label x:Name="label_hardware" Content="Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="579,11,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="listBox_listofhardware" HorizontalAlignment="Left" Height="408" Margin="579,39,0,0" VerticalAlignment="Top" Width="141" SelectionChanged="hardwareSelected"></ListBox>
-        <Button x:Name="button_addhardware" Content="Add Hardware" HorizontalAlignment="Left" Margin="477,302,0,0" VerticalAlignment="Top" Width="90"/>
-        <Button x:Name="button_deletehardware" Content="Delete Hardware" HorizontalAlignment="Left" Margin="477,327,0,0" VerticalAlignment="Top" Width="90"/>
-        <Button x:Name="button_displayinfo" Content="Display Info" HorizontalAlignment="Left" Margin="477,352,0,0" VerticalAlignment="Top" Width="90" Click="button_displayinfo_Click"/>
+        <Button x:Name="button_addhardware" Content="Add Hardware" HorizontalAlignment="Left" Margin="477,302,0,0" VerticalAlignment="Top" Width="90" Click="button_addhardware_Click"/>
+        <Button x:Name="button_deletehardware" Content="Delete Hardware" HorizontalAlignment="Left" Margin="477,327,0,0" VerticalAlignment="Top" Width="90" Click="button_deletehardware_Click"/>
         <Label x:Name="label_name_beschriftung" Content="Name:" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_name" HorizontalAlignment="Left" Margin="77,304,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_type_beschriftung" Content="Type:" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>

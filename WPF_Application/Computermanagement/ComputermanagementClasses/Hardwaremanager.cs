@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,24 +12,32 @@ namespace ComputermanagementClasses
     public static class Hardwaremanager
     {
 
-        private static HashSet<Hardware> allHardware = new HashSet<Hardware>(); //nur bis rest eingebaut wird
+        private static HashSet<Hardware> allHardware = new HashSet<Hardware>(); 
         public static void addHardware(Hardware newHardware)
         {
-            if (!allHardware.Contains(newHardware))
-            {
-                allHardware.Add(new Hardware(newHardware));
-            }
-            else
-            {
-                throw new Exception("This ID is already taken");
-            }
+            System.Collections.Specialized.NameValueCollection temp = new NameValueCollection() {
+                        { "hname", newHardware.name },
+                        { "hdesc", newHardware.desc },
+                        { "hlogo", newHardware.logo }
+            };
+            RestCall.makePostRestcall("/hardware/", temp);
         }
         public static void removeHardwareByObject(Hardware toremove)
         {
-            if (allHardware.Contains(toremove))
-                allHardware.RemoveWhere(e => (e.id == toremove.id));
-            else
-                throw new Exception("The element with id " + toremove.id + " cant be removed because it does not exist!");
+            System.Collections.Specialized.NameValueCollection temp = new NameValueCollection() {
+                        { "hid", ""+toremove.id }
+            };
+            RestCall.makeDELETERestcall("/hardware/", temp);
+        }
+        public static void updateHardware(Hardware toupdate)
+        {
+            System.Collections.Specialized.NameValueCollection temp = new NameValueCollection() {
+                        { "hid", ""+toupdate.id },
+                        { "hname", toupdate.name },
+                        { "hdesc", toupdate.desc },
+                        { "hlogo", toupdate.logo }
+            };
+            RestCall.makePUTRestcall("/hardware/", temp);
         }
         public static void removeHardwareByID(int id)
         {

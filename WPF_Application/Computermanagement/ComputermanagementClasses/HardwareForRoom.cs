@@ -13,7 +13,7 @@ namespace ComputermanagementClasses
         public int id { get; set; }
         [JsonProperty("name")]
         public string name { get; set; }
-        [JsonProperty("hdesc")]
+        [JsonProperty("desc")] //add h again
         public string hdesc { get; set; }
         [JsonProperty("type")]
         public string type { get; set; }
