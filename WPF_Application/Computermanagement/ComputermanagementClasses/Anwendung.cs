@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,26 +9,35 @@ namespace ComputermanagementClasses
 {
     public class Anwendung : IComparable<Anwendung>
     {
+        [JsonProperty("id")]
         public int id { get; set; }
+        [JsonProperty("name")]
         public string name { get; set; }
-        public string details { get; set; }
-
-        public Anwendung(int id, string name, string details)
+        [JsonProperty("type")]
+        public string type { get; set; }
+        [JsonProperty("desc")]
+        public string desc { get; set; }
+        
+        public Anwendung(int id, string name, string desc)
         {
             this.id = id;
             this.name = name;
-            this.details = details;
+            this.desc = desc;
         }
-        public Anwendung(string name, string details)
+        public Anwendung(string name, string desc)
         {
             this.name = name;
-            this.details = details;
+            this.desc = desc;
         }
         public Anwendung(Anwendung tocopy)
         {
             this.id = tocopy.id;
             this.name = tocopy.name;
-            this.details = tocopy.details;
+            this.desc = tocopy.desc;
+        }
+
+        public Anwendung()
+        {
         }
 
         public int CompareTo(Anwendung other)
