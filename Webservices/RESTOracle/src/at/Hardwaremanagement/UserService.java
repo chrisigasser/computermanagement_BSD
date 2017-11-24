@@ -408,7 +408,7 @@ public class UserService {
 			return Response.ok(del).build();
 			
 		} catch(Exception ex) {
-			return javax.ws.rs.core.Response.status(500).build();
+			return Response.status(500).build();
 		}
 	}
 	
