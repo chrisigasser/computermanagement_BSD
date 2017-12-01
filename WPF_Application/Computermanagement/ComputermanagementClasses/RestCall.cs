@@ -14,7 +14,7 @@ namespace ComputermanagementClasses
 {
     static class RestCall
     {
-        private static string ipOfRestServer = "http://192.168.196.61:8080/RESTOracle/rest/UserService";
+        private static string ipOfRestServer = "http://192.168.137.1:8080/RESTOracle/rest/UserService";
 
         public static string makeRestCall(string URL, string urlParameters)
         {

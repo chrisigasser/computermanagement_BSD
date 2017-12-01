@@ -1,0 +1,57 @@
+﻿<Window x:Class="Computermanagement.HardwareForRoomDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Computermanagement"
+        mc:Ignorable="d"
+        Title="HardwareForRoomDetails" Height="849.741" Width="435.334">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_name" Content="Name"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_name" Text="Name" IsEnabled="False"/>
+
+        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_desc" Content="Description"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_desc" Text="Description" IsEnabled="False"/>
+
+        <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_type" Content="Type"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_type" Text="Type" IsEnabled="False"/>
+
+        <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_working" Content="Working"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_working" Text="true/false" IsEnabled="False"/>
+
+        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="1" Grid.RowSpan="3" x:Name="label_networkinfo" Content="Networkinfo"/>
+        <Label Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_isdhcp" Content="DHCP"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_isdhcp" Text="true/false" IsEnabled="False"/>
+        <Label Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_furtherinformation" Content="Further Information"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_furtherinformation" Text="Netmask: 255.255.255.0" IsEnabled="False"/>
+
+        <Label Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="1" Grid.RowSpan="3" x:Name="label_applications" Content="Applications"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="3" x:Name="textbox_applications"/>
+
+    </Grid>
+</Window>
