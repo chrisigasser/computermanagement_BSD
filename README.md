@@ -1,4 +1,11 @@
 # Statusberichte
+## 27.10.2017
+* REST API
+    * Finished implementing of GET
+* WPF
+    * Implemented REST Calls
+    * Json Parser
+
 ## 20.10.2017
 * updated ERD
 * WPF

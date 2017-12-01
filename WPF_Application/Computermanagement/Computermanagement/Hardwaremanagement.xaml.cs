@@ -21,21 +21,26 @@ namespace Computermanagement
     public partial class Hardwaremanagement : Window
     {
         List<Hardware> listOfHardware;
-        Hardware selectedHardware = null;
+         Hardware selectedHardware = null;
         public Hardwaremanagement()
         {
             InitializeComponent();
             listOfHardware = new List<Hardware>();
+            
             Init();
         }
 
         private void Init()
         {
-            Hardwaremanager.addHardware(new Hardware(1, "Test01", "Test01.jpg", "Test01 pic"));
-            Hardwaremanager.addHardware(new Hardware(2, "Test02", "Test02.jpg", "Test02 pic"));
-            Hardwaremanager.addHardware(new Hardware(3, "Test03", "Test03.jpg", "Test03 pic"));
+            loadHardwareRestCall();
             refreshGUI();
             setStatusOfInputs(false);
+        }
+
+        private void loadHardwareRestCall()
+        {
+            this.listOfHardware = Hardwaremanager.getallHardware();
+            this.lb_ListOfHardware.SelectedIndex = -1;
         }
 
         private void setStatusOfInputs(bool status)
@@ -51,15 +56,14 @@ namespace Computermanagement
 
         private void refreshGUI()
         {
-            this.listOfHardware = Hardwaremanager.getallHardware();
             this.lb_ListOfHardware.ItemsSource = this.listOfHardware;
 
             if(this.selectedHardware != null)
             {
                 setStatusOfInputs(true);
-                this.textbox_description.Text = this.selectedHardware.description;
+                this.textbox_description.Text = this.selectedHardware.desc;
                 this.textbox_name.Text = this.selectedHardware.name;
-                this.textbox_logopath.Text = this.selectedHardware.logopath;
+                this.textbox_logopath.Text = this.selectedHardware.logo;
             }
             else
             {
@@ -78,6 +82,34 @@ namespace Computermanagement
                 this.selectedHardware = null;
 
             refreshGUI();
+        }
+
+        private void button_createNew_Click(object sender, RoutedEventArgs e)
+        {
+            Hardware newHardware = new Hardware(this.textbox_name.Text, this.textbox_logopath.Text, "", this.textbox_description.Text);
+            Hardwaremanager.addHardware(newHardware);
+            loadHardwareRestCall();
+        }
+
+        private void button_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedHardware != null)
+            {
+                Hardwaremanager.removeHardwareByObject(this.selectedHardware);
+                loadHardwareRestCall();
+            }
+        }
+
+        private void button_save_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedHardware != null)
+            {
+                this.selectedHardware.desc = this.textbox_description.Text;
+                this.selectedHardware.logo = this.textbox_logopath.Text;
+                this.selectedHardware.name = this.textbox_name.Text;
+                Hardwaremanager.updateHardware(this.selectedHardware);
+                loadHardwareRestCall();
+            }
         }
     }
 }

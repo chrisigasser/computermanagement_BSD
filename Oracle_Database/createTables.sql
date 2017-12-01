@@ -53,8 +53,11 @@ create table roomHAShardware (
     id int primary key,
     hardwareID int references hardware(id),
     roomID int REFERENCES room(id),
-	name varchar2(100)
+	name varchar2(100),
+	rhdesc varchar2(500)
 );
+
+alter table roomHAShardware add constraint uniqueRoomName unique (name, roomID);
 
 create table networkInfo (
   part int references roomHAShardware(id),
