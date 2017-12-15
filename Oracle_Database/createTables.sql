@@ -85,10 +85,10 @@ create table avail_User (
 );
 
 create table allowedUser (
-   id int primary key,
    part int references roomHAShardware(id),
    isAD Number(1,0),
-   uname int references avail_User(id)
+   uname int references avail_User(id),
+   primary key(part, isAD, uname)
 );
 
 create table works (
