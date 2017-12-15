@@ -81,8 +81,9 @@ namespace ComputermanagementClasses
                 //Todo: check i successful
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
             

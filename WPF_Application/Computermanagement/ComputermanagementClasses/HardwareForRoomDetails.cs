@@ -15,7 +15,7 @@ namespace ComputermanagementClasses
         [JsonProperty("name")]
         public string name { get; set; }
         [JsonProperty("desc")]
-        public string hdesc { get; set; }
+        public string desc { get; set; }
         [JsonProperty("type")]
         public string type { get; set; }
         [JsonProperty("room")]
@@ -26,6 +26,8 @@ namespace ComputermanagementClasses
         public List<Anwendung> applications { get; set; }
         [JsonProperty("networkInfo")]
         public NetworkInfo networkInfo { get; set; }
+        [JsonProperty("working")]
+        public bool working { get; set; }
         public HardwareForRoomDetails()
         {
 

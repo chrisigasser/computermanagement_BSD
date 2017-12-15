@@ -49,6 +49,7 @@
     <Compile Include="Anwendungsmanager.cs" />
     <Compile Include="HardwareForRoom.cs" />
     <Compile Include="HardwareForRoomDetails.cs" />
+    <Compile Include="HardwareForRoomDetailsManager.cs" />
     <Compile Include="Housing.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Hardwaremanager.cs" />
