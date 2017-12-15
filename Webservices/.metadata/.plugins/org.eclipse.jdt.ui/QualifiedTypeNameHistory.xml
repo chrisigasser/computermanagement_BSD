@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="at.Objects.Hardware"/>
 <fullyQualifiedTypeName name="at.Objects.NetworkInfo"/>
 <fullyQualifiedTypeName name="at.Objects.roomHasHardware"/>
-<fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="at.Objects.User"/>
 <fullyQualifiedTypeName name="at.Objects.Anwendung"/>
 <fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
@@ -30,4 +29,7 @@
 <fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
 <fullyQualifiedTypeName name="javax.ws.rs.DELETE"/>
 <fullyQualifiedTypeName name="javax.ws.rs.PUT"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="java.sql.SQLType"/>
 </qualifiedTypeNameHistroy>

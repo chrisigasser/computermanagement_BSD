@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -34,7 +35,6 @@ import at.Objects.Hardware;
 import at.Objects.Housing;
 import at.Objects.NetworkInfo;
 import at.Objects.Room;
-import at.Objects.User;
 import at.Objects.roomHasHardware;
 
 @Path("/UserService")
@@ -42,6 +42,144 @@ import at.Objects.roomHasHardware;
 public class UserService {
 	//http://192.168.194.150:8080/RESTOracle/rest/UserService/<PATH>
 	//ResultSet beginnt mit zählen bei 1!!!!
+	
+	@POST
+	@Path("/room/hardware/networkInfo")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String addNetworkInfo(@FormParam("hid") int parName,
+								 @FormParam("isDHCP") int isDHCP,
+								 @FormParam("addInfo") String addInfo) {
+		
+		Connection conn = null;
+		int updated = 0;
+		try {
+			conn = ConnectionFactory.get();
+			PreparedStatement update = conn.prepareStatement("UPDATE networkInfo SET isDHCP = ?, additionalInfo = ? WHERE part = ?");
+			PreparedStatement insert = conn.prepareStatement("INSERT INTO networkInfo (part, isDHCP, additionalInfo) VALUES(?,?,?)");
+			update.setInt(1, isDHCP);
+			update.setString(2, addInfo);
+			update.setInt(3, parName);
+			updated = update.executeUpdate();
+			if(updated == 0) {
+				insert.setInt(2, isDHCP);
+				insert.setString(3, addInfo);
+				insert.setInt(1, parName);
+				insert.executeUpdate();
+				return "inserted";
+			}
+			return "Updated";
+		}
+		catch(SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	@POST
+	@Path("/room/hardware/works")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String addWorks(@FormParam("hid") int parName,
+								 @FormParam("isWorking") int isWorking) {
+		
+		Connection conn = null;
+		int updated = 0;
+		try {
+			conn = ConnectionFactory.get();
+			PreparedStatement update = conn.prepareStatement("UPDATE works SET working = ? WHERE part = ?");
+			PreparedStatement insert = conn.prepareStatement("INSERT INTO works VALUES(?,?)");
+			update.setInt(1, isWorking);
+			update.setInt(2, parName);
+			updated = update.executeUpdate();
+			if(updated == 0) {
+				insert.setInt(1, parName);
+				insert.setInt(2, isWorking);
+				insert.executeUpdate();
+				return "inserted";
+			}
+			return "Updated";
+		}
+		catch(SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	@POST
+	@Path("/room/hardware/furtherInfo")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String addFurtherInfo(@FormParam("hid") int parName,
+								 @FormParam("info") String info) {
+		
+		Connection conn = null;
+		int updated = 0;
+		try {
+			conn = ConnectionFactory.get();
+			PreparedStatement update = conn.prepareStatement("UPDATE furtherInformation SET info = ? WHERE part = ?");
+			PreparedStatement insert = conn.prepareStatement("INSERT INTO furtherInformation VALUES(?,?)");
+			update.setString(1, info);
+			update.setInt(2, parName);
+			updated = update.executeUpdate();
+			if(updated == 0) {
+				insert.setInt(1, parName);
+				insert.setString(2, info);
+				insert.executeUpdate();
+				return "inserted";
+			}
+			return "Updated";
+		}
+		catch(SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	
+	
+	
+	@POST
+	@Path("/room/hardware/application")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String addApplication(@FormParam("hid") int parName,
+								 @FormParam("aID") int aID) {
+		
+		Connection conn = null;
+		int updated = 0;
+		try {
+			conn = ConnectionFactory.get();
+			PreparedStatement insert = conn.prepareStatement("insert into hasAnwendung VALUES(?, ?)");
+			insert.setInt(1, aID);
+			insert.setInt(2, parName);
+			return insert.executeUpdate() + "";
+		}
+		catch(SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	@DELETE
+	@Path("/room/hardware/application")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String removeApplication(@FormParam("hid") int parName,
+								 @FormParam("aID") int aID) {
+		
+		Connection conn = null;
+		int updated = 0;
+		try {
+			conn = ConnectionFactory.get();
+			PreparedStatement del = conn.prepareStatement("delete from hasAnwendung where anwendungsid = ? AND part = ?");
+			del.setInt(1, aID);
+			del.setInt(2, parName);
+			return del.executeUpdate() + "";
+		}
+		catch(SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	
+	
 	
 	@GET 
 	@Path("/hardware")
@@ -286,51 +424,7 @@ public class UserService {
 		
 		
 	}
-	
-	@GET
-	@Path("/user")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getUsers() {
-		try {
-			ArrayList<User> all = _getAllUsers();
-			
-			JSONArray allJSON = new JSONArray();
-			for(User s : all) {
-				allJSON.add(s.toJson());
-			}
-			return allJSON.toJSONString();
-		} catch (SQLException e) {
-			return "SQLException";
-		}
-	}
-	
-	@GET
-	@Path("/user/{userID}")
-	@Produces(MediaType.APPLICATION_JSON) 
-	public String getUser(@PathParam("userID") int uid) {
-		try {
-			Connection conn = ConnectionFactory.get();
-			PreparedStatement prepStmt = conn.prepareStatement("select uname, udesc from avail_User where id = ?");
-			prepStmt.setInt(1, uid);
-			ResultSet rs = prepStmt.executeQuery();
-			
-			User l = null;
-			while (rs.next()) {
-				l = new User(rs.getString(1), rs.getString(2), uid);
-			}
-			
-			rs.close();
-			prepStmt.close();
-			conn.close();
-			
-			if(l != null) {
-				return l.toJson().toJSONString();
-			}
-		} catch (SQLException e) {
-			return "SQLException";
-		}
-		return "{}";
-	}
+
 	
 	@GET
 	@Path("/application")
@@ -475,11 +569,10 @@ public class UserService {
 		if(base != null) {
 			JSONObject baseObject = base.toJSON();
 			NetworkInfo nf = _getNetworkInfoForRHH(base);
-			JSONObject userManagement = _getUserManagement(base);
-			JSONObject allAnwendungen = _getAllApplications(base);
+			JSONArray allAnwendungen = _getAllApplications(base);
 			if(nf != null)
 				baseObject.put("networkInfo", nf.toJsonWithoutPart());
-			baseObject.put("userManagement", userManagement);
+			
 			baseObject.put("applications", allAnwendungen);
 			
 			try {
@@ -563,6 +656,36 @@ public class UserService {
 		}
 	}
 	
+	@PUT
+	@Path("/room/hardware")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN) 
+	public Response changeHardware(@FormParam("hid") int parHardware,
+							          @FormParam("name") String parName,
+							          @FormParam("rhdesc") String parDesc) {
+		try {
+			if(parName != null && parDesc != null) {
+				Connection conn = ConnectionFactory.get();
+				PreparedStatement stmt = conn.prepareStatement("update roomHAShardware SET name = ?, rhdesc = ? where id = ?");
+				stmt.setString(1, parName);
+				stmt.setString(2, parDesc);
+				stmt.setInt(3, parHardware);
+				
+				int updated = stmt.executeUpdate();
+				stmt.close();
+				conn.close();
+				return Response.ok(updated).build();
+			}
+			else {
+				return javax.ws.rs.core.Response.status(400).build();
+			}
+		}
+		catch(Exception ex) {
+			return javax.ws.rs.core.Response.status(500).build();
+		}
+	}
+	
+	
 	@DELETE
 	@Path("/room/hardware")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -586,8 +709,7 @@ public class UserService {
 	}
 	
 	
-	private JSONObject _getAllApplications(roomHasHardware base) {
-		JSONObject userManagement = new JSONObject();
+	private JSONArray _getAllApplications(roomHasHardware base) {
 		JSONArray all = new JSONArray();
 		try {
 			Connection conn = ConnectionFactory.get();
@@ -603,62 +725,13 @@ public class UserService {
 			rs.close();
 			prepStmt.close();
 			conn.close();
-			userManagement.put("allApplications", all);
 		}
 		catch(SQLException ex) {
 			
 		}
 		
 		
-		return userManagement;
-	}
-
-	private JSONObject _getUserManagement(roomHasHardware base) {
-		JSONObject userManagement = new JSONObject();
-		try {
-			Connection conn = ConnectionFactory.get();
-			PreparedStatement prepStmt = conn.prepareStatement("select DISTINCT isAD from allowedUser where part = ?");
-			prepStmt.setInt(1, base.getId());
-			ResultSet rs = prepStmt.executeQuery();
-			
-			boolean isSet = false;
-			while (rs.next()) {
-				if(rs.getBoolean(1) == true)
-					isSet = true;
-			}
-			
-			rs.close();
-			prepStmt.close();
-			conn.close();
-			if(isSet)
-				userManagement.put("managedByAD", true);
-			else {
-				JSONArray allUsers = new JSONArray();
-				
-				conn = ConnectionFactory.get();
-				prepStmt = conn.prepareStatement("select s.uname as uname, s.ID as suid, s.UDESC as udesc from allowedUser au JOIN avail_User s ON au.uname = s.id where part = ?");
-				prepStmt.setInt(1, base.getId());
-				rs = prepStmt.executeQuery();
-				
-				while (rs.next()) {
-					User s = new User(rs.getString("uname"), rs.getString("udesc"), rs.getInt("suid"));
-					allUsers.add(s.toJson());
-				}
-				
-				rs.close();
-				prepStmt.close();
-				conn.close();
-				
-				userManagement.put("users", allUsers);
-			}
-			
-		}
-		catch(SQLException ex) {
-			
-		}
-		
-		
-		return userManagement;
+		return all;
 	}
 
 	private NetworkInfo _getNetworkInfoForRHH(roomHasHardware base) {
@@ -686,7 +759,7 @@ public class UserService {
 	private roomHasHardware _getSingleRHH(int id) {
 		try {
 			Connection conn = ConnectionFactory.get();
-			PreparedStatement prepStmt = conn.prepareStatement("select rh.hdesc as hdesc, rh.ID as rhID, rh.hardwareID as hwID, rh.roomid as roomID, rh.name as hwName from roomHAShardware rh where rh.id = ?");
+			PreparedStatement prepStmt = conn.prepareStatement("select rh.rhdesc as hdesc, rh.ID as rhID, rh.hardwareID as hwID, rh.roomid as roomID, rh.name as hwName from roomHAShardware rh where rh.id = ?");
 			prepStmt.setInt(1, id);
 			ResultSet rs = prepStmt.executeQuery();
 			
@@ -712,21 +785,6 @@ public class UserService {
 		ResultSet res = stmt.executeQuery("select id, name, adesc from anwendung");
 		while (res.next()) {
 			all.add(new Anwendung(res.getInt(1), res.getString(2), res.getString(3)));
-		}
-		res.close();
-		stmt.close();
-		conn.close();
-		
-		return all;
-	}
-	
-	private ArrayList<User> _getAllUsers() throws SQLException {
-		ArrayList<User> all = new ArrayList<User>();
-		Connection conn = ConnectionFactory.get();
-		Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		ResultSet res = stmt.executeQuery("select id, uname, udesc from avail_User");
-		while (res.next()) {
-			all.add(new User(res.getString(2), res.getString(3), res.getInt(1)));
 		}
 		res.close();
 		stmt.close();
