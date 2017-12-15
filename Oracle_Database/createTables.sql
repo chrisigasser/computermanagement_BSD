@@ -79,7 +79,7 @@ create table hasAnwendung (
 );
 
 create table avail_User (
-  id int primary key,
+  id number primary key,
   uname VARCHAR2(100),
   udesc VARCHAR2(1000)
 );
@@ -87,7 +87,7 @@ create table avail_User (
 create table allowedUser (
    part int references roomHAShardware(id),
    isAD Number(1,0),
-   uname int references avail_User(id),
+   uname number references avail_User(id),
    primary key(part, isAD, uname)
 );
 
