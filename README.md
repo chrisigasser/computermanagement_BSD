@@ -1,4 +1,33 @@
 # Statusberichte
+
+## 15.12.2017
+* REST API
+    * finished Webservice
+* WPF
+    * Implemented REST Calls
+    * Bugfixing POST Call
+
+## 01.12.2017
+* REST API
+    * POST, PUT, DELETE bug fixing
+* WPF
+    * Implemented REST Calls
+
+## 24.11.2017
+* Sprint Review
+
+## 10.11.2017
+* REST API
+    * POST, PUT, DELETE
+* WPF
+    * Implemented REST Calls
+
+## 03.11.2017
+* REST API
+    * POST, PUT, DELETE
+* WPF
+    * Implemented REST Calls
+
 ## 27.10.2017
 * REST API
     * Finished implementing of GET
