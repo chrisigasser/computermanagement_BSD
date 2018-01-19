@@ -21,14 +21,14 @@ app.config(function($routeProvider) {
 
 app.controller('mainCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
 	switch($location.path()) {
-		case "/":
-			setOverviewActive();
-			break;
 		case "/applications":
 			setApplicationsActive();
 			break;
 		case "/users":
 			setUsersActive();
+			break;
+		default:
+			setOverviewActive();
 			break;
 	}
 
@@ -67,6 +67,10 @@ app.controller('mainCtrl', ["$scope", "$http", "$timeout", "$location", function
 }]);
 
 app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
+	$scope.allHouses = [];
+	$scope.allRooms = [];
+	$scope.allHardware = [];
+
 	$http.get(url + "/housing")
 	.then(
 		function mySuccess(response) {
@@ -76,6 +80,30 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 			alert("not reachable");
 		}
 	);
+
+	$scope.selectedHouseChanged = () => {
+		$http.get(url + "/housing/"+$scope.selectedHouse.id)
+		.then(
+			function mySuccess(response) {
+				$scope.allRooms = response.data.rooms;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
+
+	$scope.selectedRoomsChanged = () => {
+		$http.get(url + "/room/"+$scope.selectedRoom.id)
+		.then(
+			function mySuccess(response) {
+				$scope.allHardware = response.data;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
 }]);
 
 app.controller('applicationsCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
