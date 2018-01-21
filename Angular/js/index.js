@@ -104,6 +104,30 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 			}
 		);
 	}
+
+	$scope.getInfos = (hid) => {
+		$scope.showNetworkInfo = false;
+		$scope.showApplications = false;
+
+		$scope.furtherName = hid.name;
+		$scope.furtherDesc = hid.desc;
+		$scope.furtherType = hid.hname;
+		$scope.furtherTypeDesc = hid.hdesc;
+
+		$http.get(url + "/room/hardware/"+hid.id)
+		.then(
+			function mySuccess(response) {
+				if(response.data.networkInfo != undefined) {
+					$scope.furtherDHCP = response.data.networkInfo.isDHCP;
+					$scope.furtherNetInfo = response.data.networkInfo.furtherInfo;
+					$scope.showNetworkInfo = true;
+				}
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
 }]);
 
 app.controller('applicationsCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {

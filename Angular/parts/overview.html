@@ -1,2 +1,41 @@
 ﻿<select name="Houses" selected-index="0" ng-change="selectedHouseChanged()" ng-model="selectedHouse" ng-options="x.name for x in allHouses"></select>
 <select name="Rooms" selected-index="0" ng-change="selectedRoomsChanged()" ng-model="selectedRoom" ng-options="x.name for x in allRooms"></select>
+
+
+<table class="table table-hover">
+    <thead><tr><td>Name</td><td>Hardwaretype</td><td>Further Info</td></tr></thead>
+    <tbody>
+    <tr ng-repeat="x in allHardware"><td>{{x.name}}</td><td>{{x.hname}}</td><td><button type="button" ng-click="getInfos(x);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open further Infos</button></td></tr>
+    </tbody>
+</table>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" ng-bind="furtherName"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+              <tr><td>Name:</td><td ng-bind="furtherName"></td></tr>
+              <tr><td>Description:</td><td ng-bind="furtherDesc"></td></tr>
+              <tr><td>Type:</td><td ng-bind="furtherType"></td></tr>
+              <tr><td>Typenbeschreibung:</td><td ng-bind="furtherTypeDesc"></td></tr>
+          </table>
+
+          <table class="table" ng-show="showNetworkInfo" style="margin-top: 10%">
+                <tr><td>DHCP</td><td><input type="checkbox" ng-checked="furtherDHCP"  disabled="1"/></td></tr>
+                <tr><td>weitere Netzwerk Info:</td><td ng-bind="furtherNetInfo"></td></tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
