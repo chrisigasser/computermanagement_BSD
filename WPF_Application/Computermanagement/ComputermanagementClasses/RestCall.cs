@@ -60,7 +60,7 @@ namespace ComputermanagementClasses
                 //Todo: check i successful
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -78,8 +78,7 @@ namespace ComputermanagementClasses
                     response = client.UploadValues(URL, urlParameters);
                 }
 
-                //Todo: check i successful
-                return true;
+                return true; 
             }
             catch (Exception ex)
             {
