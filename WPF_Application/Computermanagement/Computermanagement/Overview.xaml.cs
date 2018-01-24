@@ -198,5 +198,15 @@ namespace Computermanagement
                 }
             }
         }
+
+        private void showDetails(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedHardwareForroom != null)
+            {
+                ComputermanagementClasses.HardwareForRoomDetails h = OverviewManager.getDetailsForHardwareInRoom(selectedHardwareForroom);
+                Computermanagement.HardwareForRoomDetails hwfrdetails = new Computermanagement.HardwareForRoomDetails(h);
+                hwfrdetails.Show();
+            }
+        }
     }
 }

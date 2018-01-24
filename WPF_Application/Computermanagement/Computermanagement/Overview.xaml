@@ -5,21 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Computermanagement"
         mc:Ignorable="d"
-        Title="Overview" Height="486.279" Width="736.939">
+        Title="Overview" Height="486.279" Width="771.605">
     <Grid>
         <ComboBox x:Name="comboBox_housing"  HorizontalAlignment="Left" Margin="77,10,0,0" VerticalAlignment="Top" Width="246" SelectionChanged="housingSelected"></ComboBox>
         <Label x:Name="label_housing" Content="Housing" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBox_Room" HorizontalAlignment="Left" Margin="347,10,0,0" VerticalAlignment="Top" Width="220" SelectionChanged="roomSelectionChanged"></ComboBox>
         <Image x:Name="image" HorizontalAlignment="Left" Source="/data/Housings/Housing1.png" Height="249" Margin="17,48,0,0" VerticalAlignment="Top" Width="550"/>
-        <Label x:Name="label_hardware" Content="Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="579,11,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="listBox_listofhardware" HorizontalAlignment="Left" Height="408" Margin="579,39,0,0" VerticalAlignment="Top" Width="141" SelectionChanged="hardwareSelected"></ListBox>
-        <Button x:Name="button_addhardware" Content="Add Hardware" HorizontalAlignment="Left" Margin="477,302,0,0" VerticalAlignment="Top" Width="90" Click="button_addhardware_Click"/>
-        <Button x:Name="button_deletehardware" Content="Delete Hardware" HorizontalAlignment="Left" Margin="477,327,0,0" VerticalAlignment="Top" Width="90" Click="button_deletehardware_Click"/>
+        <Label x:Name="label_hardware" Content="Hardware&#xD;&#xA;" HorizontalAlignment="Left" Margin="603,10,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBox_listofhardware" HorizontalAlignment="Left" Height="408" Margin="603,39,0,0" VerticalAlignment="Top" Width="152" SelectionChanged="hardwareSelected"></ListBox>
+        <Button x:Name="button_addhardware" Content="Add Hardware" HorizontalAlignment="Left" Margin="468,302,0,0" VerticalAlignment="Top" Width="99" Click="button_addhardware_Click"/>
+        <Button x:Name="button_deletehardware" Content="Delete Hardware" HorizontalAlignment="Left" Margin="468,327,0,0" VerticalAlignment="Top" Width="99" Click="button_deletehardware_Click"/>
         <Label x:Name="label_name_beschriftung" Content="Name:" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_name" HorizontalAlignment="Left" Margin="77,304,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_type_beschriftung" Content="Type:" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_type" HorizontalAlignment="Left" Margin="77,335,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_desc_beschriftung" Content="Desc:" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_desc" HorizontalAlignment="Left" Margin="77,366,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_showDetails" Content="Show Details" HorizontalAlignment="Left" Margin="468,352,0,0" VerticalAlignment="Top" Width="99" Click="showDetails"/>
     </Grid>
 </Window>

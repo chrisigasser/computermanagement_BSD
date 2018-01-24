@@ -49,7 +49,6 @@ namespace ComputermanagementClasses
             {
                 return null;
             }
-            
         }
 
         public static List<HardwareForRoom> getHardwareForRoom(Room room)
@@ -82,6 +81,22 @@ namespace ComputermanagementClasses
                         { "rhid", ""+id }
             };
             RestCall.makeDELETERestcall("/room/hardware", temp);
+        }
+
+        public static HardwareForRoomDetails getDetailsForHardwareInRoom(HardwareForRoom h)
+        {
+            try
+            {
+                string response = RestCall.makeRestCall("/room/hardware/" + h.id,"");
+
+                HardwareForRoomDetails result = JsonConvert.DeserializeObject<HardwareForRoomDetails>(response);
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
