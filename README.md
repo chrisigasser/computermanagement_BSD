@@ -1,5 +1,11 @@
 # Statusberichte
 
+
+## 26.01.2017
+* Angular
+    * Added update Functionality
+* Presentation
+
 ## 19.01.2017
 * Angular
     * Implemented Overview, Applications and Hardwaretypes
