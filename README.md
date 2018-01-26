@@ -1,5 +1,24 @@
 # Statusberichte
 
+## 19.01.2017
+* Angular
+    * Implemented Overview, Applications and Hardwaretypes
+* Java FX
+    * created mongoDB
+
+## 12.01.2017
+* Angular
+    * Implemented first Webservice calls
+* WPF
+    * finished Project + bugfixing
+
+## 22.12.2017
+* Angular
+    * Project generated
+    * first Layout created
+* WPF
+    * Implemented REST Calls for update
+
 ## 15.12.2017
 * REST API
     * finished Webservice
