@@ -64,7 +64,7 @@ namespace Computermanagement
                 this.listbox_Allanwendungen.ItemsSource = this.allPossibleAnwendungen;
                 this.texbox_desc.Text = this.hfrdetails.desc;
                 this.texbox_name.Text = this.hfrdetails.name;
-                this.texbox_type.Text = this.hfrdetails.type;
+                //this.texbox_type.Text = this.hfrdetails.type;
                 this.texbox_working.Text = (this.hfrdetails.working) ? "ja" : "nein";
                 //this.texbox_working.Text = this.hfrdetails.working + "";
                 if (this.hfrdetails.networkInfo != null)

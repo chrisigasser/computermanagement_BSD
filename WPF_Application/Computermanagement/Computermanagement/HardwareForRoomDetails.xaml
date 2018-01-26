@@ -32,9 +32,6 @@
         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_desc" Content="Description"/>
         <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_desc" Text="Description" />
 
-        <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_type" Content="Type"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_type" Text="Type" IsEnabled="False"/>
-
         <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" x:Name="label_working" Content="Working"/>
         <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="texbox_working" Text="true/false" />
 
@@ -67,5 +64,6 @@
         <Button Content="Save and Close" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="1" Click="Button_Click"/>
         <Button x:Name="btn_add" Content="+" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="btn_add_Click"/>
         <Button x:Name="btn_remove" Content="-" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="btn_remove_Click"/>
+        <Label Content="Weitere Informationen" HorizontalAlignment="Left" Margin="10,9.667,0,0" Grid.Row="2" FontSize="15pt" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
     </Grid>
 </Window>
