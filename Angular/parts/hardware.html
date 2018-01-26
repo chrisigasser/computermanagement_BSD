@@ -1,0 +1,6 @@
+<table class="table table-hover">
+        <thead><tr><td>Name</td><td>Beschreibung</td><td></td></tr></thead>
+        <tbody>
+        <tr ng-repeat="x in allHardware"><td>{{x.name}}</td><td>{{x.desc}}</td><td><button type="button" ng-click="change(x);" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Bearbeiten</button></td></tr>
+        </tbody>
+</table>

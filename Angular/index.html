@@ -26,7 +26,7 @@
 <body ng-app="myApp" ng-controller="mainCtrl">
             <div class="container-fluid">
                 <div class="row">
-                    <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" ng-class="overviewClassActive" ng-click="overviewClicked()">Overview</a>
@@ -35,11 +35,10 @@
                                 <a class="nav-link" ng-class="ApplicationsClassActive" ng-click="ApplicationsClicked()">Applications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" ng-class="UsersClassActive" ng-click="UsersClicked()">Users</a>
+                                    <a class="nav-link" ng-class="HardwareClassActive" ng-click="HardwareClicked()">Hardwaretypen</a>
                             </li>
                         </ul>
                     </nav>
-
 
                     <div id="mainDiv" ng-view>
                             

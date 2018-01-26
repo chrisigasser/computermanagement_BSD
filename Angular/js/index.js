@@ -12,10 +12,10 @@ app.config(function($routeProvider) {
         templateUrl : "./parts/applications.html",
 		controller : "applicationsCtrl"
 	})
-	.when("/users", {
-        templateUrl : "./parts/users.html",
-		controller : "usersCtrl"
-    })
+	.when("/hardware", {
+        templateUrl : "./parts/hardware.html",
+		controller : "HardwareCtrl"
+	})
 });
 
 
@@ -23,9 +23,9 @@ app.controller('mainCtrl', ["$scope", "$http", "$timeout", "$location", function
 	switch($location.path()) {
 		case "/applications":
 			setApplicationsActive();
-			break;
-		case "/users":
-			setUsersActive();
+			break
+		case "/hardware":
+			setHardwareActive();
 			break;
 		default:
 			setOverviewActive();
@@ -42,27 +42,27 @@ app.controller('mainCtrl', ["$scope", "$http", "$timeout", "$location", function
 		$location.url("applications");
 	}
 
-	$scope.UsersClicked = () => {
-		setUsersActive();
-		$location.url("users");
+	$scope.HardwareClicked = () => {
+		setHardwareActive();
+		$location.url("hardware");
 	}
 
 	function setOverviewActive() {
 		$scope.overviewClassActive = 'active';
 		$scope.ApplicationsClassActive = '';
-		$scope.UsersClassActive = '';
+		$scope.HardwareClassActive = '';
 	}
 
 	function setApplicationsActive() {
 		$scope.overviewClassActive = '';
 		$scope.ApplicationsClassActive = 'active';
-		$scope.UsersClassActive = '';
+		$scope.HardwareClassActive = '';
 	}
 
-	function setUsersActive() {
+	function setHardwareActive() {
 		$scope.overviewClassActive = '';
 		$scope.ApplicationsClassActive = '';
-		$scope.UsersClassActive = 'active';
+		$scope.HardwareClassActive = 'active';
 	}
 }]);
 
@@ -131,9 +131,68 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 }]);
 
 app.controller('applicationsCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
-	
+	update();
+
+	function update() {
+		$scope.allAnwendungen = [];
+		$http.get(url + "/application")
+		.then(
+			function mySuccess(response) {
+				$scope.allAnwendungen = response.data;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
+
+	$scope.change = (app) => {
+		$scope.furtherName = app.name;
+		$scope.furtherDesc = app.desc;
+		$scope.current = app;
+	}
+
+	$scope.save = () => {
+		var a = {aid: $scope.current.id, aname: $scope.furtherName, adesc: $scope.furtherDesc};
+
+		$http({
+			method: 'PUT',
+			url: url + "/application",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: a
+		}).then(function(response) {
+			update();
+		 }, function(response) {
+			alert("Error during update!");
+		 });
+	}
 }]);
 
-app.controller('usersCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
+app.controller('HardwareCtrl', ["$scope", "$http", "$timeout", "$location", function ($scope, $http, $timeout, $location) {
+	update();
 
+	function update() {
+		$scope.allHardware = [];
+		$http.get(url + "/hardware")
+		.then(
+			function mySuccess(response) {
+				$scope.allHardware = response.data;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
+
+	$scope.change = (app) => {
+		$scope.furtherName = app.name;
+		$scope.furtherDesc = app.desc;
+		$scope.current = app;
+	}
 }]);
