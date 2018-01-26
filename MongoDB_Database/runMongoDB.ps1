@@ -1,0 +1,1 @@
+mongod --dbpath C:\Users\Fabian\Documents\GitHub\computermanagement_BSD\MongoDB_Database
