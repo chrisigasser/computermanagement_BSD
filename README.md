@@ -1,5 +1,13 @@
 # Statusberichte
 
+## 09.02.2017
+* Angular
+    * finished Hardware and Applications View
+* Java FX
+    * GUI for JavaFX created
+
+## 02.02.2017
+* TdoT
 
 ## 26.01.2017
 * Angular
