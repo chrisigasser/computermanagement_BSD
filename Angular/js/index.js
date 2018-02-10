@@ -153,24 +153,75 @@ app.controller('applicationsCtrl', ["$scope", "$http", "$timeout", "$location", 
 	}
 
 	$scope.save = () => {
-		var a = {aid: $scope.current.id, aname: $scope.furtherName, adesc: $scope.furtherDesc};
 
-		$http({
-			method: 'PUT',
-			url: url + "/application",
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			transformRequest: function(obj) {
-				var str = [];
-				for(var p in obj)
-				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-				return str.join("&");
-			},
-			data: a
-		}).then(function(response) {
-			update();
-		 }, function(response) {
-			alert("Error during update!");
-		 });
+		if($scope.current == undefined) {
+			var myObj = {aname: $scope.furtherName, adesc: $scope.furtherDesc};
+			$http({
+				method: 'POST',
+				url: url + "/application",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: myObj
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
+		else {
+			var a = {aid: $scope.current.id, aname: $scope.furtherName, adesc: $scope.furtherDesc};
+
+			$http({
+				method: 'PUT',
+				url: url + "/application",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: a
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
+	}
+
+
+	$scope.addHardware = () => {
+		$scope.furtherName = "";
+		$scope.furtherDesc = "";
+		$scope.current = undefined;
+	}
+
+	$scope.delete = () => {
+		if($scope.current != undefined) {
+			var a = {aid: $scope.current.id};			
+			$http({
+				method: 'DELETE',
+				url: url + "/application",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: a
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
 	}
 }]);
 
@@ -190,9 +241,79 @@ app.controller('HardwareCtrl', ["$scope", "$http", "$timeout", "$location", func
 		);
 	}
 
-	$scope.change = (app) => {
-		$scope.furtherName = app.name;
-		$scope.furtherDesc = app.desc;
-		$scope.current = app;
+	$scope.change = (hw) => {
+		$scope.furtherName = hw.name;
+		$scope.furtherDesc = hw.desc;
+		$scope.current = hw;
+	}
+
+	$scope.save = () => {
+		
+		if($scope.current == undefined) {
+			var myObj = {hname: $scope.furtherName, hdesc: $scope.furtherDesc};
+			$http({
+				method: 'POST',
+				url: url + "/hardware",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: myObj
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
+		else {
+			var a = {hid: $scope.current.id, hname: $scope.furtherName, hdesc: $scope.furtherDesc};			
+			$http({
+				method: 'PUT',
+				url: url + "/hardware",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: a
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
+	}
+
+	$scope.addHardware = () => {
+		$scope.furtherName = "";
+		$scope.furtherDesc = "";
+		$scope.current = undefined;
+	}
+
+	$scope.delete = () => {
+		if($scope.current != undefined) {
+			var a = {hid: $scope.current.id};			
+			$http({
+				method: 'DELETE',
+				url: url + "/hardware",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					return str.join("&");
+				},
+				data: a
+			}).then(function(response) {
+				update();
+			}, function(response) {
+				alert("Error during update!");
+			});
+		}
 	}
 }]);
