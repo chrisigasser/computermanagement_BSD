@@ -33,9 +33,53 @@
           </table>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-toggle="modal" ng-click="anwendungenModalOpened();" data-target="#myModalApp">Applications</button>
+
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
   
     </div>
   </div>
+
+  <div id="myModalApp" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" ng-bind="furtherName"></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <table>
+              <thead><tr><td>Available</td><td>Installed</td></tr></thead>
+              <tr>
+                <td>
+                    <table class="table table-hover">
+                        <thead><tr><td>Name</td><td>Beschreibung</td></tr></thead>
+                        <tbody ondrop="angular.element(this).scope().droppedToAvail(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+                          <tr ng-repeat="x in allAnwendungen" name="{{x.id}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)"><td>{{x.name}}</td><td>{{x.desc}}</td></tr>
+                          <tr ng-if="installedApps.length == 0"><td colspan="2">No more Applications</td></tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table table-hover">
+                        <thead><tr><td>Name</td><td>Beschreibung</td></tr></thead>
+                        <tbody ondrop="angular.element(this).scope().droppedToInstalled(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+                          <tr ng-repeat="x in installedApps" name="{{x.id}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)"><td>{{x.name}}</td><td>{{x.desc}}</td></tr>
+                          <tr ng-if="installedApps.length == 0"><td colspan="2">Nothing installed</td></tr>
+                        </tbody>
+                    </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>

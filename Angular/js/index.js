@@ -105,10 +105,26 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		);
 	}
 
+	$scope.anwendungenModalOpened = () => {
+		$scope.allAnwendungen = [];
+		$http.get(url + "/application")
+		.then(
+			function mySuccess(response) {
+				$scope.allAnwendungen = response.data.filter((obj) => {
+					return !( $scope.installedApps.some((el) => {
+						return el.id == obj.id;
+					}));
+				});
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
+
 	$scope.getInfos = (hid) => {
 		$scope.showNetworkInfo = false;
-		$scope.showApplications = false;
-
+		$scope.hid = hid;
 		$scope.furtherName = hid.name;
 		$scope.furtherDesc = hid.desc;
 		$scope.furtherType = hid.hname;
@@ -118,6 +134,7 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		.then(
 			function mySuccess(response) {
 				if(response.data.networkInfo != undefined) {
+					$scope.installedApps = response.data.applications;
 					$scope.furtherDHCP = response.data.networkInfo.isDHCP;
 					$scope.furtherNetInfo = response.data.networkInfo.furtherInfo;
 					$scope.showNetworkInfo = true;
@@ -127,6 +144,88 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 				alert("not reachable");
 			}
 		);
+	}
+
+	$scope.allowDrop = (ev) => {
+		ev.preventDefault();
+	}
+	
+	$scope.drag = (ev) => {
+		ev.dataTransfer.setData("anwendungsID", ev.target.getAttribute("name"));
+	}
+	
+	$scope.droppedToAvail = (ev) => {
+		ev.preventDefault();
+		var id = ev.dataTransfer.getData("anwendungsID");
+		
+		var obj = $scope.installedApps.find((elem) => {
+			return elem.id == id;
+		});
+		if(obj != undefined) {
+			$scope.allAnwendungen.push(obj);
+			$scope.installedApps = $scope.installedApps.filter((elem) => {
+				return elem.id != id;
+			});
+			$scope.$apply();
+			removeAnwendungFromHardware(id, $scope.hid.id);
+		}
+	}
+
+	$scope.droppedToInstalled = (ev) => {
+		ev.preventDefault();
+		var id = ev.dataTransfer.getData("anwendungsID");
+
+		var obj = $scope.allAnwendungen.find((elem) => {
+			return elem.id == id;
+		});
+		if(obj != undefined) {
+			$scope.installedApps.push(obj);
+			$scope.allAnwendungen = $scope.allAnwendungen.filter((elem) => {
+				return elem.id != id;
+			});
+			$scope.$apply();
+			addAnwendungToHardware(id, $scope.hid.id);
+		}
+	}
+	
+	function removeAnwendungFromHardware(id, hid) {
+		var myObj = {aID: id, hid: hid};
+		$http({
+			method: 'DELETE',
+			url: url + "/room/hardware/application",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: myObj
+		}).then(function(response) {
+			console.log("Added");
+		}, function(response) {
+			alert("Error during update!");
+		});
+	}
+
+	function addAnwendungToHardware(id, hid) {
+		var myObj = {aID: id, hid: hid};
+		$http({
+			method: 'POST',
+			url: url + "/room/hardware/application",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: myObj
+		}).then(function(response) {
+			console.log("Added");
+		}, function(response) {
+			alert("Error during update!");
+		});
 	}
 }]);
 
