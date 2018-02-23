@@ -718,7 +718,7 @@ public class UserService {
 			ResultSet rs = prepStmt.executeQuery();
 			
 			while (rs.next()) {
-				Anwendung a = new Anwendung(rs.getInt(1), rs.getString(2), rs.getString(2));
+				Anwendung a = new Anwendung(rs.getInt(1), rs.getString(2), rs.getString(3));
 				all.add(a.toJson());
 			}
 			
