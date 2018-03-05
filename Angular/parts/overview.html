@@ -1,5 +1,6 @@
 ﻿<select name="Houses" selected-index="0" ng-change="selectedHouseChanged()" ng-model="selectedHouse" ng-options="x.name for x in allHouses"></select>
 <select name="Rooms" selected-index="0" ng-change="selectedRoomsChanged()" ng-model="selectedRoom" ng-options="x.name for x in allRooms"></select>
+<button type="button" class="btn btn-default" data-toggle="modal" ng-click="addNewAnwendung();" data-target="#ModalAdd">Add</button>
 
 
 <table class="table table-hover">
@@ -33,6 +34,7 @@
           </table>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteHW();">Delete</button>            
           <button type="button" class="btn btn-default" data-toggle="modal" ng-click="anwendungenModalOpened();" data-target="#myModalApp">Applications</button>
 
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -77,6 +79,34 @@
             </table>
           </div>
           <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+    <div id="ModalAdd" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">neue Anwendung</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <h4>Housing:</h4>
+              <select name="Houses" ng-change="newHouseChanged()"  ng-model="selectedHouseForNew" ng-options="x.name for x in allHouses"></select>
+              <h4>Room:</h4>
+              <select name="Rooms" ng-model="selectedRoomForNew" ng-options="x.name for x in allRoomsForNew"></select>
+              <h4>Type:</h4>
+              <select name="Hardwaretype" ng-model="selectedHardwareForNew" ng-options="x.name for x in allHardwareTypes"></select>
+              <h4>Name:</h4><input type="text" ng-model="nameForNew" />
+              <h4>Description:</h4><input type="text" ng-model="descForNew" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addNewHardwareToRoom()">Add</button>
            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>

@@ -81,6 +81,52 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		}
 	);
 
+	$scope.newHouseChanged = () => {
+		$http.get(url + "/housing/"+$scope.selectedHouseForNew.id)
+		.then(
+			function mySuccess(response) {
+				$scope.allRoomsForNew = response.data.rooms;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+	}
+
+	$scope.addNewHardwareToRoom = () => {
+		$http({
+			method: 'POST',
+			url: url + "/room/hardware",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: {hid: $scope.selectedHardwareForNew.id, roomID: $scope.selectedRoomForNew.id,
+				   name: $scope.nameForNew, rhdesc: $scope.descForNew }
+		}).then(function(response) {
+			updateHardware();
+		}, function(response) {
+			alert("Error during update!");
+		});
+	}
+
+	$scope.addNewAnwendung = () => {
+		$scope.allHardwareTypes = [];
+		$http.get(url + "/hardware")
+		.then(
+			function mySuccess(response) {
+				$scope.allHardwareTypes = response.data;
+			},
+			function myError(response) {
+				alert("not reachable");
+			}
+		);
+
+	}
+
 	$scope.selectedHouseChanged = () => {
 		$http.get(url + "/housing/"+$scope.selectedHouse.id)
 		.then(
@@ -94,6 +140,29 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 	}
 
 	$scope.selectedRoomsChanged = () => {
+		updateHardware();
+	}
+
+	$scope.deleteHW = () => {
+		$http({
+			method: 'DELETE',
+			url: url + "/room/hardware",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: {rhid: $scope.hid.id}
+		}).then(function(response) {
+			updateHardware();
+		}, function(response) {
+			alert("Error during update!");
+		});
+	}
+
+	function updateHardware() {
 		$http.get(url + "/room/"+$scope.selectedRoom.id)
 		.then(
 			function mySuccess(response) {
@@ -111,9 +180,14 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		.then(
 			function mySuccess(response) {
 				$scope.allAnwendungen = response.data.filter((obj) => {
-					return !( $scope.installedApps.some((el) => {
-						return el.id == obj.id;
-					}));
+					if($scope.installedApps != undefined) {
+						return !( $scope.installedApps.some((el) => {
+							return el.id == obj.id;
+						}));
+					}
+					else {
+						return true;
+					}
 				});
 			},
 			function myError(response) {
