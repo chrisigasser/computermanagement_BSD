@@ -1,5 +1,23 @@
 # Statusberichte
 
+## 09.03.2017
+* Angular
+    * Network View for Hardware implemented
+* Java FX
+    * Controller implementation
+
+## 02.03.2017
+* Angular
+    * Applications View for Hardware implemented
+* Java FX
+    * Controller implementation
+
+## 23.02.2017
+* Angular
+    * Applications View for Hardware implemented
+* Java FX
+    * Node Webservice for mongoDB
+
 ## 09.02.2017
 * Angular
     * finished Hardware and Applications View
