@@ -180,20 +180,39 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		.then(
 			function mySuccess(response) {
 				$scope.allAnwendungen = response.data.filter((obj) => {
-					if($scope.installedApps != undefined) {
 						return !( $scope.installedApps.some((el) => {
 							return el.id == obj.id;
 						}));
-					}
-					else {
-						return true;
-					}
 				});
 			},
 			function myError(response) {
 				alert("not reachable");
 			}
 		);
+	}
+
+	$scope.SaveNetworkInfo = () => {
+		$http({
+			method: 'POST',
+			url: url + "/room/hardware/networkInfo",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},
+			data: {hid: $scope.hid.id, isDHCP: ($scope.newDHCP)?1:0, addInfo: $scope.newNetworkInfo}
+		}).then(function(response) {
+			$scope.getInfos($scope.hid);
+		}, function(response) {
+			alert("Error during update!");
+		});
+	}
+
+	$scope.NetworkModalOpenend = () => {
+		$scope.newDHCP = $scope.furtherDHCP;
+		$scope.newNetworkInfo = $scope.furtherNetInfo;
 	}
 
 	$scope.getInfos = (hid) => {
@@ -203,6 +222,9 @@ app.controller('overviewCtrl', ["$scope", "$http", "$timeout", "$location", func
 		$scope.furtherDesc = hid.desc;
 		$scope.furtherType = hid.hname;
 		$scope.furtherTypeDesc = hid.hdesc;
+		$scope.installedApps = [];
+		$scope.furtherDHCP = undefined;
+		$scope.furtherNetInfo = undefined;
 
 		$http.get(url + "/room/hardware/"+hid.id)
 		.then(

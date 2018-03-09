@@ -36,7 +36,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteHW();">Delete</button>            
           <button type="button" class="btn btn-default" data-toggle="modal" ng-click="anwendungenModalOpened();" data-target="#myModalApp">Applications</button>
-
+          <button type="button" class="btn btn-default" data-toggle="modal" ng-click="NetworkModalOpenend();" data-target="#ModalNetworkSettings">Network Settings</button>
+          
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -62,7 +63,7 @@
                         <thead><tr><td>Name</td><td>Beschreibung</td></tr></thead>
                         <tbody ondrop="angular.element(this).scope().droppedToAvail(event)" ondragover="angular.element(this).scope().allowDrop(event)">
                           <tr ng-repeat="x in allAnwendungen" name="{{x.id}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)"><td>{{x.name}}</td><td>{{x.desc}}</td></tr>
-                          <tr ng-if="installedApps.length == 0"><td colspan="2">No more Applications</td></tr>
+                          <tr ng-if="allAnwendungen.length == 0"><td colspan="2">No more Applications</td></tr>
                         </tbody>
                     </table>
                 </td>
@@ -107,6 +108,30 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="addNewHardwareToRoom()">Add</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+    <div id="ModalNetworkSettings" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Netzwerkeinstellungen</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+                <table class="table" style="margin-top: 10%">
+                    <tr><td>DHCP</td><td><input type="checkbox" ng-model="newDHCP"/></td></tr>
+                    <tr><td>weitere Netzwerk Info:</td><td><input type="text" ng-model="newNetworkInfo" /></td></tr>
+                </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="SaveNetworkInfo()">Save</button>
            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
