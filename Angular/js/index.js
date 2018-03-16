@@ -1,6 +1,6 @@
 ﻿var app = angular.module('myApp', ['ngRoute', 'ngCookies']);
 
-var url = "http://localhost:8080/RESTOracle/rest/UserService";
+var url = "http://192.168.137.1:8080/RESTOracle/rest/UserService";
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -30,6 +30,16 @@ app.controller('mainCtrl', ["$scope", "$http", "$timeout", "$location", function
 		default:
 			setOverviewActive();
 			break;
+	}
+
+	$scope.toggle = () => {
+		var menu = document.getElementById('myNav');
+		if($("#myNav").is(":hidden")) {
+			menu.classList.remove("d-none");
+		}
+		else {
+			menu.classList.add("d-none");
+		}
 	}
 
 	$scope.overviewClicked = () => {
