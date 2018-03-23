@@ -2,6 +2,14 @@
 
 ## 09.03.2017
 * Angular
+    * Application Bug fixed
+    * Design for mobile Phone implemented
+* Java FX
+    * Controller implementation
+    * Database report implemented
+
+## 09.03.2017
+* Angular
     * Network View for Hardware implemented
 * Java FX
     * Controller implementation
