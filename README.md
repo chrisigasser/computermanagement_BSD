@@ -1,6 +1,13 @@
 # Statusberichte
 
-## 09.03.2017
+## 23.03.2017
+* Angular
+    * Design for mobile Phone implemented
+* Java FX
+    * Database report implemented
+    * Bug fixing
+
+## 16.03.2017
 * Angular
     * Application Bug fixed
     * Design for mobile Phone implemented
